@@ -140,10 +140,10 @@ export default async function Page({ searchParams }: PageProps) {
 
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-[1320px] items-center justify-between gap-6 px-5 py-4 lg:px-8">
-          <a href="#top" aria-label="Northline Industrial home" className="flex shrink-0 items-center gap-2.5">
-            <span className="flex size-10 items-center justify-center rounded-lg bg-[#15395b] text-white"><SlidersHorizontal className="size-5" /></span>
-            <span className="leading-tight"><span className="block text-[15px] font-extrabold tracking-[0.11em] text-[#142b42]">NORTHLINE</span><span className="block text-[9px] font-semibold tracking-[0.21em] text-slate-500">INDUSTRIAL SUPPLY</span></span>
-          </a>
+          <a href="#top" aria-label="VZA Industrial home" className="flex shrink-0 items-center gap-2.5">
+  <img src="/placeholder-logo.png" alt="VZA Logo" className="h-9 w-auto object-contain" />
+  <span className="block text-[15px] font-extrabold tracking-[0.11em] text-[#142b42]">VZA VẬT TƯ</span>
+</a>
           <nav aria-label={isVietnamese ? 'Điều hướng chính' : 'Main navigation'} className="hidden items-center gap-8 text-[13px] font-semibold text-slate-600 lg:flex">
             <a className="transition hover:text-[#e7792a]" href="#categories">{isVietnamese ? 'Danh mục' : 'Categories'}</a>
             <a className="transition hover:text-[#e7792a]" href="#products">{isVietnamese ? 'Sản phẩm' : 'Products'}</a>
