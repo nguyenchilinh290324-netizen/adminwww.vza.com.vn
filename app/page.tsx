@@ -1,14 +1,27 @@
 import { cookies } from 'next/headers'
-import LanguageToggle from '@/components/language-toggle'
+import { LanguageToggle } from '@/components/language-toggle'
 import {
+  Activity,
   ArrowRight,
   ArrowUpRight,
   BadgeCheck,
+  Box,
+  Cable,
+  Check,
+  ChevronDown,
+  Clock3,
+  Cpu,
+  Gauge,
   Headphones,
+  Microscope,
   PackageCheck,
   Search,
+  ShieldCheck,
   ShoppingCart,
+  SlidersHorizontal,
   Truck,
+  Wind,
+  Zap,
 } from 'lucide-react'
 
 const mockProducts = [
