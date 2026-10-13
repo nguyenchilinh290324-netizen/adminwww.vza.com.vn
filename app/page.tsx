@@ -20,7 +20,7 @@ const mockProducts = [
     category: 'Industrial Thermo-Hygrometer',
     spec: '-40~80°C · 0~99.9%RH · ±0.3°C · External probe 3m',
     price: 'Contact for price',
-    image: '/images/lx935.png', // <-- Đường dẫn ảnh
+    image: '/images/lx935.png',
     badge: 'BEST SELLER',
   },
   {
@@ -249,9 +249,8 @@ export default async function Page({ searchParams }: PageProps) {
           {categories.map(({ name, nameVi, note, noteVi, image, count }) => (
             <a key={name} href="#products" className="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-[#e7792a] hover:shadow-md">
               <div className="flex items-start justify-between">
-                {/* Thay thế icon danh mục bằng khung ảnh */}
                 <div className="flex size-14 items-center justify-center rounded-lg bg-slate-50 p-2 transition group-hover:bg-orange-50">
-                  <img src={image} alt={name} className="h-full w-full object-contain mix-blend-multiply" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+                  <img src={image} alt={name} className="h-full w-full object-contain mix-blend-multiply" />
                 </div>
                 <span className="text-xs font-semibold text-slate-400">{count} {isVietnamese ? 'MODEL' : 'ITEMS'}</span>
               </div>
@@ -306,9 +305,8 @@ export default async function Page({ searchParams }: PageProps) {
                       <span className="rounded bg-orange-100 px-2.5 py-0.5 text-[10px] font-extrabold text-[#d86c21]">{tr.badge}</span>
                     </div>
                     
-                    {/* Khu vực chứa ảnh sản phẩm */}
                     <div className="relative mb-4 flex h-44 w-full items-center justify-center overflow-hidden rounded-lg bg-[#f8fafc]">
-                      <img src={image} alt={tr.name} className="h-full w-full object-contain p-2 mix-blend-multiply transition duration-300 hover:scale-105" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+                      <img src={image} alt={tr.name} className="h-full w-full object-contain p-2 mix-blend-multiply transition duration-300 hover:scale-105" />
                     </div>
 
                     <h3 className="text-base font-bold text-[#142b42]">{tr.name}</h3>
