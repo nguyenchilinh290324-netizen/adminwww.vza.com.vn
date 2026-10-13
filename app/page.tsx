@@ -1,23 +1,14 @@
 import { cookies } from 'next/headers'
-import { LanguageToggle } from '@/components/language-toggle'
+import LanguageToggle from '@/components/language-toggle'
 import {
-  Activity,
   ArrowRight,
   ArrowUpRight,
   BadgeCheck,
-  Clock3,
-  Cpu,
-  Gauge,
   Headphones,
-  Microscope,
   PackageCheck,
   Search,
-  ShieldCheck,
   ShoppingCart,
-  SlidersHorizontal,
   Truck,
-  Wind,
-  Zap,
 } from 'lucide-react'
 
 const mockProducts = [
@@ -29,8 +20,7 @@ const mockProducts = [
     category: 'Industrial Thermo-Hygrometer',
     spec: '-40~80°C · 0~99.9%RH · ±0.3°C · External probe 3m',
     price: 'Contact for price',
-    icon: Gauge,
-    tone: 'blue',
+    image: '/images/lx935.png', // <-- Đường dẫn ảnh
     badge: 'BEST SELLER',
   },
   {
@@ -40,8 +30,7 @@ const mockProducts = [
     category: 'Industrial Thermo-Hygrometer',
     spec: '600x400x32mm · RS485 support · High precision chip',
     price: 'Contact for price',
-    icon: Activity,
-    tone: 'slate',
+    image: '/images/rc919.png',
     badge: 'HIGH ACCURACY',
   },
   {
@@ -51,8 +40,7 @@ const mockProducts = [
     category: 'Industrial Thermo-Hygrometer',
     spec: '390x280x30mm · Date/Time display · 5V 1A power',
     price: 'Contact for price',
-    icon: Clock3,
-    tone: 'blue',
+    image: '/images/lx952.png',
     badge: 'POPULAR',
   },
   {
@@ -62,8 +50,7 @@ const mockProducts = [
     category: 'Industrial Thermo-Hygrometer',
     spec: 'APP remote monitoring · Data export · External probe',
     price: 'Contact for price',
-    icon: Zap,
-    tone: 'orange',
+    image: '/images/lx915w.png',
     badge: 'SMART WIFI',
   },
 
@@ -75,8 +62,7 @@ const mockProducts = [
     category: 'Air Quality & Gas Detectors',
     spec: 'Built-in 2000mAh battery · Type-C · 115x138x28mm',
     price: 'Contact for price',
-    icon: Wind,
-    tone: 'green',
+    image: '/images/rc5001.png',
     badge: 'IN STOCK',
   },
   {
@@ -86,8 +72,7 @@ const mockProducts = [
     category: 'Air Quality & Gas Detectors',
     spec: 'Semiconductor gas sensor · Circular ring display',
     price: 'Contact for price',
-    icon: Microscope,
-    tone: 'slate',
+    image: '/images/rc5020.png',
     badge: 'NEW MODEL',
   },
   {
@@ -97,8 +82,7 @@ const mockProducts = [
     category: 'Air Quality & Gas Detectors',
     spec: 'CO2, TVOC, PM2.5, HCHO, Temp & Humidity integration',
     price: 'Contact for price',
-    icon: Cpu,
-    tone: 'orange',
+    image: '/images/lx962.png',
     badge: 'PRO GRADE',
   },
 
@@ -110,8 +94,7 @@ const mockProducts = [
     category: 'Welding & Rework Equipment',
     spec: 'C245 precision handle · Rapid heating · Digital control',
     price: 'Contact for price',
-    icon: Zap,
-    tone: 'blue',
+    image: '/images/982d.png',
     badge: 'TOP RATED',
   },
   {
@@ -121,8 +104,7 @@ const mockProducts = [
     category: 'Welding & Rework Equipment',
     spec: 'Simultaneous iron & hot tweezers · LED digital display',
     price: 'Contact for price',
-    icon: SlidersHorizontal,
-    tone: 'orange',
+    image: '/images/938bd.png',
     badge: 'BEST VALUE',
   },
   {
@@ -132,8 +114,7 @@ const mockProducts = [
     category: 'Welding & Rework Equipment',
     spec: '30V 5A adjustable · Low ripple · Short circuit protection',
     price: 'Contact for price',
-    icon: ShieldCheck,
-    tone: 'green',
+    image: '/images/3005d.png',
     badge: 'LAB GRADE',
   }
 ]
@@ -144,7 +125,7 @@ const categories = [
     nameVi: 'Đo nhiệt độ & độ ẩm công nghiệp', 
     note: 'LED displays, high-precision sensors & remote monitoring', 
     noteVi: 'Màn hình LED lớn, cảm biến độ chính xác cao & giám sát từ xa', 
-    icon: Gauge, 
+    image: '/images/cat-temp.png', 
     count: '1,200+' 
   },
   { 
@@ -152,7 +133,7 @@ const categories = [
     nameVi: 'Thiết bị đo chất lượng không khí', 
     note: 'CO2, PM2.5, HCHO, TVOC & environmental monitors', 
     noteVi: 'Máy đo khí CO2, bụi mịn PM2.5, formaldehyde & cảm biến khí độc', 
-    icon: Wind, 
+    image: '/images/cat-air.png', 
     count: '850+' 
   },
   { 
@@ -160,7 +141,7 @@ const categories = [
     nameVi: 'Thiết bị hàn & trạm khò Yihua', 
     note: 'Soldering stations, hot air guns & DC power supplies', 
     noteVi: 'Trạm hàn tinh vi C245, máy khò, hút khói & nguồn DC ổn định', 
-    icon: Zap, 
+    image: '/images/cat-weld.png', 
     count: '1,500+' 
   },
 ]
@@ -265,11 +246,12 @@ export default async function Page({ searchParams }: PageProps) {
           <a href="#products" className="text-xs font-bold text-[#e7792a] transition hover:underline">{isVietnamese ? 'Xem tất cả sản phẩm ->' : 'View all products ->'}</a>
         </div>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map(({ name, nameVi, note, noteVi, icon: Icon, count }) => (
+          {categories.map(({ name, nameVi, note, noteVi, image, count }) => (
             <a key={name} href="#products" className="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-[#e7792a] hover:shadow-md">
               <div className="flex items-start justify-between">
-                <div className="flex size-12 items-center justify-center rounded-lg bg-orange-50 text-[#e7792a] transition group-hover:bg-[#e7792a] group-hover:text-white">
-                  <Icon className="size-6" />
+                {/* Thay thế icon danh mục bằng khung ảnh */}
+                <div className="flex size-14 items-center justify-center rounded-lg bg-slate-50 p-2 transition group-hover:bg-orange-50">
+                  <img src={image} alt={name} className="h-full w-full object-contain mix-blend-multiply" onError={(e) => { e.currentTarget.style.display = 'none' }} />
                 </div>
                 <span className="text-xs font-semibold text-slate-400">{count} {isVietnamese ? 'MODEL' : 'ITEMS'}</span>
               </div>
@@ -314,22 +296,28 @@ export default async function Page({ searchParams }: PageProps) {
           </div>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map(({ name, partNumber, brand, category, spec, price, icon: Icon, badge }) => {
+            {products.map(({ name, partNumber, brand, category, spec, price, image, badge }) => {
               const tr = productTranslations[partNumber] || { name, category, spec, badge }
               return (
-                <div key={partNumber} className="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:shadow-md">
+                <div key={partNumber} className="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
                   <div>
-                    <div className="flex items-center justify-between gap-2">
+                    <div className="mb-3 flex items-center justify-between gap-2">
                       <span className="rounded bg-slate-100 px-2.5 py-1 text-[11px] font-bold text-slate-700">{partNumber}</span>
                       <span className="rounded bg-orange-100 px-2.5 py-0.5 text-[10px] font-extrabold text-[#d86c21]">{tr.badge}</span>
                     </div>
-                    <h3 className="mt-4 text-base font-bold text-[#142b42]">{tr.name}</h3>
+                    
+                    {/* Khu vực chứa ảnh sản phẩm */}
+                    <div className="relative mb-4 flex h-44 w-full items-center justify-center overflow-hidden rounded-lg bg-[#f8fafc]">
+                      <img src={image} alt={tr.name} className="h-full w-full object-contain p-2 mix-blend-multiply transition duration-300 hover:scale-105" onError={(e) => { e.currentTarget.style.display = 'none' }} />
+                    </div>
+
+                    <h3 className="text-base font-bold text-[#142b42]">{tr.name}</h3>
                     <p className="mt-1 text-xs font-semibold text-slate-400">{brand} • {tr.category}</p>
                     <div className="mt-4 rounded-lg bg-slate-50 p-3 text-xs text-slate-600 leading-relaxed border border-slate-100">
                       <strong>{isVietnamese ? 'Thông số:' : 'Specs:'}</strong> {tr.spec}
                     </div>
                   </div>
-                  <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                  <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
                     <span className="text-xs font-bold text-slate-900">{price}</span>
                     <a href="#rfq" className="inline-flex items-center gap-1.5 rounded-lg bg-[#10263d] px-3.5 py-2 text-xs font-bold text-white transition hover:bg-[#e7792a]">
                       {isVietnamese ? 'Yêu cầu báo giá' : 'Request RFQ'} <ArrowRight className="size-3.5" />
