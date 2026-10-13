@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import LanguageToggle from '@/components/language-toggle'
+import * as LanguageToggleComponent from '@/components/language-toggle'
 import {
   ArrowRight,
   ArrowUpRight,
@@ -201,7 +201,7 @@ export default async function Page({ searchParams }: PageProps) {
             <a className="transition hover:text-[#e7792a]" href="#rfq">{isVietnamese ? 'Liên hệ' : 'Contact'}</a>
           </nav>
           <div className="flex items-center gap-2 sm:gap-3">
-            <LanguageToggle isVietnamese={isVietnamese} />
+            {LanguageToggleComponent.default ? <LanguageToggleComponent.default isVietnamese={isVietnamese} /> : <LanguageToggleComponent.LanguageToggle isVietnamese={isVietnamese} />}
             <a href="#products" aria-label={isVietnamese ? 'Xem sản phẩm' : 'Browse products'} className="flex size-10 items-center justify-center rounded-md bg-[#e7792a] text-white transition hover:bg-[#cf671c]">
               <ShoppingCart className="size-4" />
             </a>
