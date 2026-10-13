@@ -203,9 +203,9 @@ export default async function Page({ searchParams }: PageProps) {
 
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-[1320px] items-center justify-between gap-6 px-4 py-3 lg:px-8">
-          <a href="#top" aria-label="VZA Industrial home" className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#10263d] font-bold text-white">V</span>
-            <span className="block text-[18px] font-extrabold tracking-[0.11em] text-[#142b42]">VZA VẬT TƯ</span>
+          <a href="#top" aria-label="VZA Industrial home" className="flex items-center gap-2.5">
+            <img src="/logo.png" alt="VZA Logo" className="h-9 w-auto object-contain" />
+            <span className="block text-[16px] font-extrabold tracking-[0.08em] text-[#142b42]">VZA VẬT TƯ</span>
           </a>
           <nav aria-label={isVietnamese ? 'Điều hướng chính' : 'Main navigation'} className="hidden items-center gap-8 text-[13px] font-semibold text-slate-600 lg:flex">
             <a className="transition hover:text-[#e7792a]" href="#categories">{isVietnamese ? 'Danh mục' : 'Categories'}</a>
