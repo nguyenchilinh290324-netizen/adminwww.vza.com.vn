@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import LanguageToggle from '@/components/language-toggle'
+import { LanguageToggle } from '@/components/language-toggle'
 import {
   Activity,
   ArrowRight,
