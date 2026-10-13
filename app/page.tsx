@@ -5,10 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   BadgeCheck,
-  Box,
-  Cable,
-  Check,
-  ChevronDown,
   Clock3,
   Cpu,
   Gauge,
@@ -17,7 +13,7 @@ import {
   PackageCheck,
   Search,
   ShieldCheck,
-  ShoppingCard,
+  ShoppingCart,
   SlidersHorizontal,
   Truck,
   Wind,
@@ -226,7 +222,7 @@ export default async function Page({ searchParams }: PageProps) {
           <div className="flex items-center gap-2 sm:gap-3">
             <LanguageToggle isVietnamese={isVietnamese} />
             <a href="#products" aria-label={isVietnamese ? 'Xem sản phẩm' : 'Browse products'} className="flex size-10 items-center justify-center rounded-md bg-[#e7792a] text-white transition hover:bg-[#cf671c]">
-              <ShoppingCard className="size-4" />
+              <ShoppingCart className="size-4" />
             </a>
           </div>
         </div>
