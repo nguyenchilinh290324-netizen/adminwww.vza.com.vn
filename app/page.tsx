@@ -66,7 +66,7 @@ export default function Home() {
       {/* 1. TOP BAR */}
       <div className="bg-[#cc0000] text-white text-xs py-2">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <div>Chào mừng bạn đến với VZA.com.vn</div>
+          <div>Chào mừng bạn đến với VZA.COM.VN</div>
           <div className="hidden md:flex gap-6">
             <span className="flex items-center gap-1"><CheckCircle size={14} /> 100% chính hãng</span>
             <span className="flex items-center gap-1"><RefreshCcw size={14} /> Thanh toán khi nhận hàng</span>
@@ -161,23 +161,22 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Cột giữa: Slider */}
-          <div className="flex-1 bg-gray-100 rounded-md overflow-hidden relative min-h-[300px] lg:min-h-[400px]">
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-gray-700 flex flex-col items-center justify-center text-white p-8 text-center">
-              <h2 className="text-3xl font-bold mb-4 uppercase tracking-wider text-[#ff3333]">Vật Tư Toàn Quốc</h2>
-              <p className="text-lg text-gray-200">[Khu vực chèn Ảnh Slider / Banner Chính]</p>
-            </div>
-          </div>
+          {/* Cột giữa: Slider ảnh động */}
+<div className="flex-1 bg-gray-100 rounded-sm overflow-hidden relative min-h-[300px] lg:min-h-[400px]">
+  <div className="absolute inset-0 bg-slate-800 flex items-center justify-center">
+    <img src="/images/slider-1.jpg" alt="VZA Slider" className="w-full h-full object-cover" />
+  </div>
+</div>
 
-          {/* Cột phải: Banner phụ */}
-          <div className="w-full lg:w-[260px] flex flex-col gap-4">
-            <div className="h-[192px] bg-slate-800 rounded-md overflow-hidden relative flex items-center justify-center text-white/50 shadow-sm border border-gray-200">
-               [Ảnh Banner 1]
-            </div>
-            <div className="h-[192px] bg-slate-800 rounded-md overflow-hidden relative flex items-center justify-center text-white/50 shadow-sm border border-gray-200">
-               [Ảnh Banner 2]
-            </div>
-          </div>
+          {/* Cột phải: 2 Banner danh mục nổi bật */}
+<div className="w-full lg:w-[260px] flex flex-col gap-4">
+  <div className="h-[192px] bg-slate-800 rounded-sm overflow-hidden relative flex items-center justify-center">
+     <img src="/images/banner-1.jpg" alt="VZA Banner 1" className="w-full h-full object-cover" />
+  </div>
+  <div className="h-[192px] bg-slate-800 rounded-sm overflow-hidden relative flex items-center justify-center">
+     <img src="/images/banner-2.jpg" alt="VZA Banner 2" className="w-full h-full object-cover" />
+  </div>
+</div>
         </div>
       </section>
 
