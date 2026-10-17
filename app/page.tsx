@@ -1,4 +1,7 @@
+"use client"
+import React, { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { 
   Search, Phone, ChevronRight, Menu, CheckCircle, 
   Truck, RefreshCcw, ShoppingCart, Star 
@@ -53,25 +56,110 @@ const mockProducts = [
   }
 ]
 
-const categories = [
-  { name: 'Đo nhiệt độ & độ ẩm', count: '120+ sản phẩm', icon: '🌡️' },
-  { name: 'Chất lượng không khí', count: '85+ sản phẩm', icon: '💨' },
-  { name: 'Thiết bị hàn khò Yihua', count: '150+ sản phẩm', icon: '⚡' },
-  { name: 'Vật tư phòng sạch', count: '300+ sản phẩm', icon: '🛡️' },
-]
+// Từ điển đa ngôn ngữ (Đơn giản)
+const translations = {
+  vi: {
+    welcome: 'Chào mừng bạn đến với VZA.COM.VN',
+    authentic: '100% chính hãng',
+    cod: 'Thanh toán khi nhận hàng',
+    shipping: 'Giao hàng toàn quốc',
+    return: 'Đổi trả trong 7 ngày',
+    searchPlaceholder: 'Nhập mã sản phẩm (VD: LX935, YIHUA 982D)...',
+    home: 'Trang chủ',
+    about: 'Giới thiệu',
+    products: 'Sản phẩm',
+    news: 'Tin tức & Sự kiện',
+    warranty: 'Bảo hành',
+    support: 'Hỗ trợ',
+    contact: 'Liên hệ',
+    categoryTitle: 'Danh mục sản phẩm',
+    specialPromo: 'Khuyến mại đặc biệt',
+    bestSeller: 'Sản phẩm bán chạy',
+    cat1: 'Đo nhiệt độ & độ ẩm CN',
+    cat2: 'Thiết bị đo chất lượng khí',
+    cat3: 'Thiết bị hàn & trạm khò',
+    cat4: 'Vật tư công nghiệp khác',
+    highlightTitle: 'Danh mục nổi bật',
+    recommendTitle: 'Sản phẩm đề xuất',
+    viewAll: 'Xem tất cả »',
+    hotline: 'HOTLINE',
+    priceContact: 'Liên hệ',
+    noProductFound: 'Không tìm thấy sản phẩm nào phù hợp.'
+  },
+  en: {
+    welcome: 'Welcome to VZA.COM.VN',
+    authentic: '100% Authentic',
+    cod: 'Cash on delivery',
+    shipping: 'Nationwide shipping',
+    return: '7-day return policy',
+    searchPlaceholder: 'Enter product code (e.g. LX935, YIHUA 982D)...',
+    home: 'Home',
+    about: 'About Us',
+    products: 'Products',
+    news: 'News & Events',
+    warranty: 'Warranty',
+    support: 'Support',
+    contact: 'Contact',
+    categoryTitle: 'Product Categories',
+    specialPromo: 'Special Promotions',
+    bestSeller: 'Best Sellers',
+    cat1: 'Industrial Temp & Humidity',
+    cat2: 'Air Quality Monitors',
+    cat3: 'Soldering & Rework Stations',
+    cat4: 'Other Industrial Supplies',
+    highlightTitle: 'Highlighted Categories',
+    recommendTitle: 'Recommended Products',
+    viewAll: 'View All »',
+    hotline: 'HOTLINE',
+    priceContact: 'Contact',
+    noProductFound: 'No products found.'
+  }
+}
 
 export default function Home() {
+  const [lang, setLang] = useState('vi'); // State ngôn ngữ
+  const [searchQuery, setSearchQuery] = useState(''); // State ô tìm kiếm
+  const [filteredProducts, setFilteredProducts] = useState(mockProducts); // State danh sách sản phẩm hiển thị
+
+  const t = translations[lang];
+
+  // Hàm xử lý tìm kiếm
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) {
+      setFilteredProducts(mockProducts);
+      return;
+    }
+    const lowerQuery = searchQuery.toLowerCase();
+    const results = mockProducts.filter((product) => 
+      product.name.toLowerCase().includes(lowerQuery) ||
+      product.partNumber.toLowerCase().includes(lowerQuery) ||
+      product.spec.toLowerCase().includes(lowerQuery)
+    );
+    setFilteredProducts(results);
+    
+    // Tự động cuộn xuống phần sản phẩm khi tìm kiếm
+    document.getElementById('product-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const categories = [
+    { name: t.cat1, count: '120+ items', icon: '🌡️' },
+    { name: t.cat2, count: '85+ items', icon: '💨' },
+    { name: t.cat3, count: '150+ items', icon: '⚡' },
+    { name: t.cat4, count: '300+ items', icon: '🛡️' },
+  ];
+
   return (
     <div className="min-h-screen bg-white text-gray-800 font-sans">
       {/* 1. TOP BAR */}
       <div className="bg-[#cc0000] text-white text-xs py-2">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <div>Chào mừng bạn đến với VZA.COM.VN</div>
+          <div>{t.welcome}</div>
           <div className="hidden md:flex gap-6">
-            <span className="flex items-center gap-1"><CheckCircle size={14} /> 100% chính hãng</span>
-            <span className="flex items-center gap-1"><RefreshCcw size={14} /> Thanh toán khi nhận hàng</span>
-            <span className="flex items-center gap-1"><Truck size={14} /> Giao hàng toàn quốc</span>
-            <span className="flex items-center gap-1"><RefreshCcw size={14} /> Đổi trả trong 7 ngày</span>
+            <span className="flex items-center gap-1"><CheckCircle size={14} /> {t.authentic}</span>
+            <span className="flex items-center gap-1"><RefreshCcw size={14} /> {t.cod}</span>
+            <span className="flex items-center gap-1"><Truck size={14} /> {t.shipping}</span>
+            <span className="flex items-center gap-1"><RefreshCcw size={14} /> {t.return}</span>
           </div>
         </div>
       </div>
@@ -79,36 +167,69 @@ export default function Home() {
       {/* 2. HEADER BAR */}
       <header className="bg-white py-6 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 flex flex-wrap lg:flex-nowrap items-center justify-between gap-6">
-          {/* Logo VZA */}
-          <div className="flex flex-col items-center justify-center min-w-[120px]">
+          
+          {/* Logo VZA - Trỏ về trang chủ */}
+          <Link href="/" className="flex flex-col items-center justify-center min-w-[120px] cursor-pointer">
             <Image src="/logo.png" alt="VZA Logo" width={50} height={50} className="object-contain" />
             <span className="text-2xl font-black text-[#cc0000] tracking-widest mt-1">VZA</span>
-          </div>
+          </Link>
 
           {/* Thanh tìm kiếm */}
-          <div className="flex-1 max-w-2xl flex">
+          <form onSubmit={handleSearch} className="flex-1 max-w-2xl flex">
             <input 
               type="text" 
-              placeholder="Nhập mã sản phẩm (VD: LX935, YIHUA 982D)..." 
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                if(e.target.value === '') setFilteredProducts(mockProducts); // Trả lại toàn bộ sp nếu xóa rỗng
+              }}
+              placeholder={t.searchPlaceholder}
               className="w-full border-2 border-[#cc0000] border-r-0 px-4 py-2 outline-none focus:bg-gray-50"
             />
-            <button className="bg-[#cc0000] px-6 text-white transition hover:bg-red-700">
+            <button type="submit" className="bg-[#cc0000] px-6 text-white transition hover:bg-red-700 flex items-center justify-center">
               <Search size={20} />
             </button>
-          </div>
+          </form>
 
           {/* Hotline & Ngôn ngữ */}
-          <div className="flex items-center gap-4">
-            <a href="tel:0933935329" className="hidden sm:flex bg-[#cc0000] text-white items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition hover:bg-red-700 shadow-sm">
+          <div className="flex items-center gap-4 pt-3 lg:pt-0">
+            {/* Nút Hotline Zalo 1 */}
+            <a 
+              href="https://zalo.me/0933935329" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="relative hidden sm:flex bg-[#cc0000] text-white items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition hover:bg-red-700 shadow-sm mt-3"
+            >
+              <span className="absolute -top-4 left-3 text-[10px] text-gray-400 font-semibold uppercase">{t.hotline}</span>
               <Phone size={16} /> 0933.935.329
             </a>
-            <a href="tel:0898997570" className="hidden sm:flex bg-[#cc0000] text-white items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition hover:bg-red-700 shadow-sm">
+
+            {/* Nút Hotline Zalo 2 */}
+            <a 
+              href="https://zalo.me/0898997570" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="relative hidden sm:flex bg-[#cc0000] text-white items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition hover:bg-red-700 shadow-sm mt-3"
+            >
+              <span className="absolute -top-4 left-3 text-[10px] text-gray-400 font-semibold uppercase">{t.hotline}</span>
               <Phone size={16} /> 0898.997.570
             </a>
-            <div className="flex items-center gap-2 font-bold text-sm ml-2 border-l-2 border-gray-200 pl-4">
-              <button className="text-[#cc0000]">VN</button>
+
+            {/* Bộ chọn ngôn ngữ */}
+            <div className="flex items-center gap-2 font-bold text-sm ml-2 border-l-2 border-gray-200 pl-4 h-full">
+              <button 
+                onClick={() => setLang('vi')} 
+                className={lang === 'vi' ? 'text-[#cc0000]' : 'text-gray-500 hover:text-[#cc0000] transition'}
+              >
+                VN
+              </button>
               <span className="text-gray-300">|</span>
-              <button className="text-gray-500 hover:text-[#cc0000] transition">EN</button>
+              <button 
+                onClick={() => setLang('en')}
+                className={lang === 'en' ? 'text-[#cc0000]' : 'text-gray-500 hover:text-[#cc0000] transition'}
+              >
+                EN
+              </button>
             </div>
           </div>
         </div>
@@ -117,74 +238,74 @@ export default function Home() {
       {/* 3. NAVIGATION MENU */}
       <nav className="max-w-7xl mx-auto px-4 py-3 hidden md:block border-b border-gray-100">
         <ul className="flex items-center gap-8 text-sm font-bold text-gray-800 uppercase pl-[280px]">
-          <li><a href="#" className="text-[#cc0000] transition">Trang chủ</a></li>
-          <li><a href="#" className="hover:text-[#cc0000] transition">Giới thiệu</a></li>
-          <li><a href="#" className="hover:text-[#cc0000] transition">Sản phẩm</a></li>
-          <li><a href="#" className="hover:text-[#cc0000] transition">Tin tức & Sự kiện</a></li>
-          <li><a href="#" className="hover:text-[#cc0000] transition">Bảo hành</a></li>
-          <li><a href="#" className="hover:text-[#cc0000] transition">Hỗ trợ</a></li>
-          <li><a href="#" className="hover:text-[#cc0000] transition">Liên hệ</a></li>
+          <li><Link href="/" className="text-[#cc0000] transition">{t.home}</Link></li>
+          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.about}</Link></li>
+          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.products}</Link></li>
+          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.news}</Link></li>
+          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.warranty}</Link></li>
+          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.support}</Link></li>
+          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.contact}</Link></li>
         </ul>
       </nav>
 
-      {/* 4. HERO SECTION */}
+      {/* 4. HERO SECTION (Hình ảnh hiển thị như trong file image_32b226.jpg) */}
       <section className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex flex-col lg:flex-row gap-4">
           {/* Cột trái: Danh mục sản phẩm */}
           <div className="w-full lg:w-[260px] shrink-0 z-10">
             <div className="bg-[#cc0000] text-white font-bold py-3 px-4 flex items-center gap-2 uppercase text-sm rounded-t-md">
-              <Menu size={18} /> Danh mục sản phẩm
+              <Menu size={18} /> {t.categoryTitle}
             </div>
             <ul className="border border-t-0 border-gray-200 bg-white text-sm rounded-b-md shadow-sm">
               <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex items-center gap-3 cursor-pointer group">
-                <span className="text-red-500 group-hover:scale-110 transition">🎁</span> Khuyến mại đặc biệt
+                <span className="text-red-500 group-hover:scale-110 transition">🎁</span> {t.specialPromo}
               </li>
               <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex items-center gap-3 cursor-pointer group">
-                <span className="text-red-500 group-hover:scale-110 transition">🔥</span> Sản phẩm bán chạy
+                <span className="text-red-500 group-hover:scale-110 transition">🔥</span> {t.bestSeller}
               </li>
               <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group">
-                <span>Đo nhiệt độ & độ ẩm CN</span>
+                <span>{t.cat1}</span>
                 <ChevronRight size={16} className="text-gray-400 group-hover:text-[#cc0000]" />
               </li>
               <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group">
-                <span>Thiết bị đo chất lượng khí</span>
+                <span>{t.cat2}</span>
                 <ChevronRight size={16} className="text-gray-400 group-hover:text-[#cc0000]" />
               </li>
               <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group">
-                <span>Thiết bị hàn & trạm khò</span>
+                <span>{t.cat3}</span>
                 <ChevronRight size={16} className="text-gray-400 group-hover:text-[#cc0000]" />
               </li>
               <li className="p-3.5 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group">
-                <span>Vật tư công nghiệp khác</span>
+                <span>{t.cat4}</span>
                 <ChevronRight size={16} className="text-gray-400 group-hover:text-[#cc0000]" />
               </li>
             </ul>
           </div>
 
           {/* Cột giữa: Slider ảnh động */}
-<div className="flex-1 bg-gray-100 rounded-sm overflow-hidden relative min-h-[300px] lg:min-h-[400px]">
-  <div className="absolute inset-0 bg-slate-800 flex items-center justify-center">
-    <img src="/slider-1.jpg" alt="VZA Slider" className="w-full h-full object-cover" />
-  </div>
-</div>
+          <div className="flex-1 bg-gray-100 rounded-sm overflow-hidden relative min-h-[300px] lg:min-h-[400px]">
+            <div className="absolute inset-0 flex items-center justify-center bg-white">
+              <img src="/slider-1.jpg" alt="VZA Slider" className="w-full h-full object-cover" />
+            </div>
+          </div>
 
           {/* Cột phải: 2 Banner danh mục nổi bật */}
-<div className="w-full lg:w-[260px] flex flex-col gap-4">
-  <div className="h-[192px] bg-slate-800 rounded-sm overflow-hidden relative flex items-center justify-center">
-     <img src="/banner-1.jpg" alt="VZA Banner 1" className="w-full h-full object-cover" />
-  </div>
-  <div className="h-[192px] bg-slate-800 rounded-sm overflow-hidden relative flex items-center justify-center">
-     <img src="/banner-2.jpg" alt="VZA Banner 2" className="w-full h-full object-cover" />
-  </div>
-</div>
+          <div className="w-full lg:w-[260px] flex flex-col gap-4">
+            <div className="h-[192px] bg-gray-100 rounded-sm overflow-hidden relative flex items-center justify-center">
+               <img src="/banner-1.jpg" alt="VZA Banner 1" className="w-full h-full object-cover" />
+            </div>
+            <div className="h-[192px] bg-gray-100 rounded-sm overflow-hidden relative flex items-center justify-center">
+               <img src="/banner-2.jpg" alt="VZA Banner 2" className="w-full h-full object-cover" />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 5. CATEGORY HIGHLIGHTS (Phần Thân 1) */}
+      {/* 5. CATEGORY HIGHLIGHTS */}
       <section className="max-w-7xl mx-auto px-4 py-8">
         <h2 className="text-2xl font-black text-gray-800 uppercase mb-6 flex items-center gap-3">
           <span className="w-1.5 h-6 bg-[#cc0000] inline-block"></span>
-          Danh mục nổi bật
+          {t.highlightTitle}
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {categories.map((cat, idx) => (
@@ -197,64 +318,69 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. PRODUCT GRID (Phần Thân 2) */}
-      <section className="max-w-7xl mx-auto px-4 py-8 mb-12">
+      {/* 6. PRODUCT GRID (Khu vực có ID để cuộn tới khi tìm kiếm) */}
+      <section id="product-section" className="max-w-7xl mx-auto px-4 py-8 mb-12">
         <div className="flex justify-between items-end border-b-2 border-[#cc0000] pb-2 mb-6">
           <h2 className="text-2xl font-black text-gray-800 uppercase flex items-center gap-3">
             <span className="w-1.5 h-6 bg-[#cc0000] inline-block"></span>
-            Sản phẩm đề xuất
+            {t.recommendTitle}
           </h2>
-          <a href="#" className="text-sm font-bold text-[#cc0000] hover:underline hidden sm:block">Xem tất cả &raquo;</a>
+          <a href="#" className="text-sm font-bold text-[#cc0000] hover:underline hidden sm:block">{t.viewAll}</a>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {mockProducts.map((product, idx) => (
-            <div key={idx} className="border border-gray-200 rounded-md bg-white hover:shadow-xl hover:border-[#cc0000] transition duration-300 flex flex-col relative group">
-              
-              {/* Badge */}
-              <div className="absolute top-2 left-2 bg-[#cc0000] text-white text-[10px] font-bold px-2 py-1 rounded-sm z-10">
-                {product.badge}
-              </div>
-
-              {/* Image Box */}
-              <div className="h-48 bg-gray-50 p-4 flex items-center justify-center relative overflow-hidden rounded-t-md">
-                {/* Thay thẻ div này bằng thẻ <img src={product.image} /> khi có ảnh thật */}
-                <div className="text-gray-400 text-xs text-center border-2 border-dashed border-gray-300 w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                  [Ảnh {product.partNumber}]
-                </div>
-              </div>
-
-              {/* Content Box */}
-              <div className="p-4 flex flex-col flex-1">
-                <span className="text-[11px] text-gray-500 mb-1">{product.brand}</span>
-                <h3 className="text-sm font-bold text-gray-800 leading-snug mb-2 group-hover:text-[#cc0000] transition line-clamp-2">
-                  {product.name}
-                </h3>
+        {filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {filteredProducts.map((product, idx) => (
+              <div key={idx} className="border border-gray-200 rounded-md bg-white hover:shadow-xl hover:border-[#cc0000] transition duration-300 flex flex-col relative group">
                 
-                {/* Specs */}
-                <p className="text-[11px] text-gray-600 bg-gray-50 p-2 rounded-sm mb-3 line-clamp-2">
-                  {product.spec}
-                </p>
+                {/* Badge */}
+                <div className="absolute top-2 left-2 bg-[#cc0000] text-white text-[10px] font-bold px-2 py-1 rounded-sm z-10">
+                  {product.badge}
+                </div>
 
-                <div className="mt-auto">
-                  <div className="flex items-center gap-1 text-yellow-400 mb-2">
-                    <Star size={12} fill="currentColor" />
-                    <Star size={12} fill="currentColor" />
-                    <Star size={12} fill="currentColor" />
-                    <Star size={12} fill="currentColor" />
-                    <Star size={12} fill="currentColor" />
+                {/* Image Box */}
+                <div className="h-48 bg-gray-50 p-4 flex items-center justify-center relative overflow-hidden rounded-t-md">
+                  <div className="text-gray-400 text-xs text-center border-2 border-dashed border-gray-300 w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform">
+                    [Ảnh {product.partNumber}]
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-lg font-black text-[#cc0000]">{product.price}</span>
-                    <button className="bg-gray-100 hover:bg-[#cc0000] hover:text-white p-2 rounded-full transition text-gray-600">
-                      <ShoppingCart size={16} />
-                    </button>
+                </div>
+
+                {/* Content Box */}
+                <div className="p-4 flex flex-col flex-1">
+                  <span className="text-[11px] text-gray-500 mb-1">{product.brand}</span>
+                  <h3 className="text-sm font-bold text-gray-800 leading-snug mb-2 group-hover:text-[#cc0000] transition line-clamp-2">
+                    {product.name}
+                  </h3>
+                  
+                  {/* Specs */}
+                  <p className="text-[11px] text-gray-600 bg-gray-50 p-2 rounded-sm mb-3 line-clamp-2">
+                    {product.spec}
+                  </p>
+
+                  <div className="mt-auto">
+                    <div className="flex items-center gap-1 text-yellow-400 mb-2">
+                      <Star size={12} fill="currentColor" />
+                      <Star size={12} fill="currentColor" />
+                      <Star size={12} fill="currentColor" />
+                      <Star size={12} fill="currentColor" />
+                      <Star size={12} fill="currentColor" />
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-lg font-black text-[#cc0000]">{product.price === 'Liên hệ' ? t.priceContact : product.price}</span>
+                      <button className="bg-gray-100 hover:bg-[#cc0000] hover:text-white p-2 rounded-full transition text-gray-600">
+                        <ShoppingCart size={16} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12 text-gray-500 bg-gray-50 rounded-md">
+            {t.noProductFound}
+          </div>
+        )}
       </section>
 
       {/* 7. FOOTER */}
@@ -288,7 +414,7 @@ export default function Home() {
         </div>
         
         <div className="text-center text-sm text-gray-500 border-t border-gray-200 pt-6">
-          © {new Date().getFullYear()} Bản quyền thuộc về VZA.com.vn (Kim Minh Đài VN)
+          © {new Date().getFullYear()} Bản quyền thuộc về VZA.COM.VN (Kim Minh Đài VN)
         </div>
       </footer>
     </div>
