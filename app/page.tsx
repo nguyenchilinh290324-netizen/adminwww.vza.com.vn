@@ -284,10 +284,10 @@ export default function Home() {
   };
 
   const categories = [
-    { name: t.cat1, count: '120+ items', icon: '🌡️' },
-    { name: t.cat2, count: '85+ items', icon: '💨' },
-    { name: t.cat3, count: '150+ items', icon: '⚡' },
-    { name: t.cat4, count: '300+ items', icon: '🛡️' },
+    { name: t.cat1, count: '120+ items', image: '/categories/nhiet-do.png' },
+    { name: t.cat2, count: '85+ items', image: '/categories/chat-luong-khi.png' },
+    { name: t.cat3, count: '150+ items', image: '/categories/han-kho.png' },
+    { name: t.cat4, count: '300+ items', image: '/categories/vat-tu.png' },
   ];
 
   return (
@@ -448,7 +448,18 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {categories.map((cat, idx) => (
             <div key={idx} className="border border-gray-200 rounded-md p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[#cc0000] hover:shadow-md transition bg-white group">
-              <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{cat.icon}</div>
+              
+              {/* Box chứa ảnh - Sử dụng thẻ Image của Next.js */}
+              <div className="h-16 w-16 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <Image 
+                  src={cat.image} 
+                  alt={cat.name} 
+                  width={64} 
+                  height={64} 
+                  className="object-contain"
+                />
+              </div>
+
               <h3 className="font-bold text-gray-800 group-hover:text-[#cc0000] transition">{cat.name}</h3>
               <p className="text-xs text-gray-500 mt-1">{cat.count}</p>
             </div>
