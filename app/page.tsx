@@ -164,17 +164,17 @@ export default function Home() {
           {/* Cột giữa: Slider ảnh động */}
 <div className="flex-1 bg-gray-100 rounded-sm overflow-hidden relative min-h-[300px] lg:min-h-[400px]">
   <div className="absolute inset-0 bg-slate-800 flex items-center justify-center">
-    <img src="/images/slider-1.jpg" alt="VZA Slider" className="w-full h-full object-cover" />
+    <img src="/slider-1.jpg" alt="VZA Slider" className="w-full h-full object-cover" />
   </div>
 </div>
 
           {/* Cột phải: 2 Banner danh mục nổi bật */}
 <div className="w-full lg:w-[260px] flex flex-col gap-4">
   <div className="h-[192px] bg-slate-800 rounded-sm overflow-hidden relative flex items-center justify-center">
-     <img src="/images/banner-1.jpg" alt="VZA Banner 1" className="w-full h-full object-cover" />
+     <img src="/banner-1.jpg" alt="VZA Banner 1" className="w-full h-full object-cover" />
   </div>
   <div className="h-[192px] bg-slate-800 rounded-sm overflow-hidden relative flex items-center justify-center">
-     <img src="/images/banner-2.jpg" alt="VZA Banner 2" className="w-full h-full object-cover" />
+     <img src="/banner-2.jpg" alt="VZA Banner 2" className="w-full h-full object-cover" />
   </div>
 </div>
         </div>
