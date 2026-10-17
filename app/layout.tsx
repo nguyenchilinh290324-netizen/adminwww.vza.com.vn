@@ -25,7 +25,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const language = (await cookies()).get('site_language')?.value === 'en' ? 'en' : 'vi'
+  // Await trực tiếp hàm cookies() để sửa lỗi
+  const cookieStore = await cookies();
+  const langCookie = cookieStore.get('site_language');
+  const language = langCookie?.value === 'en' ? 'en' : 'vi';
 
   return (
     <html lang={language}>
