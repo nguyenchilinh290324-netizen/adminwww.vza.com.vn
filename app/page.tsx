@@ -146,11 +146,11 @@ export default function Home() {
   };
 
   const categories = [
-    { name: t.cat1, count: '120+ items', image: '/categories/nhiet-do.png' },
-    { name: t.cat2, count: '85+ items', image: '/categories/chat-luong-khi.png' },
-    { name: t.cat3, count: '150+ items', image: '/categories/han-kho.png' },
-    { name: t.cat4, count: '300+ items', image: '/categories/vat-tu.png' },
-  ];
+  { name: t.cat1, count: '120+ items', image: '/images/categories/nhiet-do.png' },
+  { name: t.cat2, count: '85+ items', image: "/images/categories/chat-luong-khi.png" },
+  { name: t.cat3, count: '150+ items', image: '/images/categories/hankho.png' },
+  { name: t.cat4, count: '300+ items', image: '/images/categories/vat-tu.png' },
+];
 
   return (
     <div className="min-h-screen bg-white text-gray-800 font-sans">
