@@ -313,8 +313,8 @@ export default function Home() {
                 <Image 
                   src={cat.image} 
                   alt={cat.name} 
-                  width={64} 
-                  height={64} 
+                  width={120} 
+                  height={120} 
                   className="object-contain"
                 />
               </div>
