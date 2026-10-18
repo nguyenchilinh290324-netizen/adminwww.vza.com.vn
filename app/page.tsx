@@ -55,7 +55,7 @@ const mockProducts = [
   },
   {
     partNumber: 'YIHUA 3005D III',
-    categoryId: 'cat4',
+    categoryId: 'cat3',
     slug: 'nguon-dc-on-dinh-dong-dien-dieu-chinh-cao-cap',
     name: 'Nguồn DC ổn định dòng điện điều chỉnh cao cấp',
     brand: 'YIHUA',
@@ -88,7 +88,6 @@ const translations = {
     cat1: 'QINGMAI', 
     cat2: 'RONGCE', 
     cat3: 'YIHUA', 
-    cat4: 'Vật tư công nghiệp khác',
     highlightTitle: 'Danh mục nổi bật',
     recommendTitle: 'Sản phẩm đề xuất',
     viewAll: 'Xem tất cả »',
@@ -159,7 +158,6 @@ export default function Home() {
     { name: t.cat1, count: '120+ items', image: '/images/categories/nhiet-do.png' },
     { name: t.cat2, count: '85+ items', image: "/images/categories/chat-luong-khi.png" },
     { name: t.cat3, count: '150+ items', image: '/images/categories/hankho.png' },
-    { name: t.cat4, count: '300+ items', image: '/images/categories/vat-tu.png' },
   ];
 
   const mainCategoryBlocks = [
@@ -192,15 +190,6 @@ export default function Home() {
         { name: 'Mũi hàn / Phụ kiện', slug: 'phu-kien-han' },
       ]
     },
-    {
-      id: 'cat4',
-      title: t.cat4,
-      slug: 'vat-tu-cong-nghiep-khac',
-      subCategories: [
-        { name: 'Nguồn DC', slug: 'nguon-dc' },
-        { name: 'Kính hiển vi', slug: 'kinh-hien-vi' },
-      ]
-    }
   ];
 
   return (
@@ -385,14 +374,6 @@ export default function Home() {
                   </ul>
                 </div>
               </li>
-
-              {/* MENU CẤP 1: VẬT TƯ KHÁC */}
-              <li className="p-3.5 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group hover:bg-gray-50 transition-colors rounded-b-md">
-                <span>{t.cat4}</span>
-                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#cc0000]" />
-              </li>
-            </ul>
-          </div>
 
           {/* SLIDER VÀ BANNER ĐƯỢC GIỮ NGUYÊN BÊN DƯỚI */}
           <div className="flex-1 bg-gray-100 rounded-sm overflow-hidden relative min-h-[300px] lg:min-h-[400px]">
