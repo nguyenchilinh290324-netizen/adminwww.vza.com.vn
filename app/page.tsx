@@ -7,7 +7,6 @@ import {
   Truck, RefreshCcw, ShoppingCart, Star 
 } from 'lucide-react'
 
-// Thêm categoryId và slug chuẩn SEO vào từng sản phẩm
 const mockProducts = [
   {
     partNumber: 'LX935',
@@ -66,7 +65,6 @@ const mockProducts = [
   }
 ]
 
-// Từ điển đa ngôn ngữ
 const translations = {
   vi: {
     welcome: 'Chào mừng bạn đến với VZA.COM.VN',
@@ -115,7 +113,6 @@ const translations = {
     cat1: 'QINGMAI', 
     cat2: 'RONGCE', 
     cat3: 'YIHUA', 
-    cat4: 'Other Industrial Supplies',
     highlightTitle: 'Highlighted Categories',
     recommendTitle: 'Recommended Products',
     viewAll: 'View All »',
@@ -131,8 +128,6 @@ export default function Home() {
   const [lang, setLang] = useState<LangType>('vi'); 
   const [searchQuery, setSearchQuery] = useState(''); 
   const [filteredProducts, setFilteredProducts] = useState(mockProducts); 
-  
-  // THÊM DÒNG NÀY: State quản lý đóng/mở menu trên di động
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const t = translations[lang];
@@ -254,8 +249,8 @@ export default function Home() {
         </header>
 
         {/* NAVIGATION MENU */}
-<div className="border-b border-gray-100 bg-white">
-  <ul className="flex md:justify-center items-center gap-4 md:gap-8 text-sm font-bold text-gray-800 uppercase py-3 max-w-7xl mx-auto px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <div className="border-b border-gray-100 bg-white">
+          <ul className="flex md:justify-center items-center gap-4 md:gap-8 text-sm font-bold text-gray-800 uppercase py-3 max-w-7xl mx-auto px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
             <li><Link href="/" className="text-[#cc0000] transition">{t.home}</Link></li>
             <li><Link href="/gioi-thieu" className="hover:text-[#cc0000] transition">{t.about}</Link></li>
             <li><Link href="/san-pham" className="hover:text-[#cc0000] transition">{t.products}</Link></li>
@@ -347,7 +342,7 @@ export default function Home() {
 
               {/* MENU CẤP 1: YIHUA */}
               <li 
-                className="p-3.5 border-b border-gray-100 flex flex-wrap justify-between items-center cursor-pointer group/main3 relative hover:bg-gray-50 transition-colors"
+                className="p-3.5 flex flex-wrap justify-between items-center cursor-pointer group/main3 relative hover:bg-gray-50 transition-colors rounded-b-md"
                 onClick={() => setActiveMenu(activeMenu === 'cat3' ? null : 'cat3')}
               >
                 <div className="w-full flex justify-between items-center hover:text-[#cc0000]">
@@ -374,8 +369,10 @@ export default function Home() {
                   </ul>
                 </div>
               </li>
+            </ul>
+          </div>
 
-          {/* SLIDER VÀ BANNER ĐƯỢC GIỮ NGUYÊN BÊN DƯỚI */}
+          {/* SLIDER VÀ BANNER */}
           <div className="flex-1 bg-gray-100 rounded-sm overflow-hidden relative min-h-[300px] lg:min-h-[400px]">
             <div className="absolute inset-0 flex items-center justify-center bg-white">
               <img src="/slider-1.jpg" alt="VZA Slider" className="w-full h-full object-cover" />
@@ -485,7 +482,7 @@ export default function Home() {
       </section>
 
       {/* KHỐI DANH MỤC CHÍNH VÀ DANH MỤC CON */}
-      {mainCategoryBlocks.map((block, index) => {
+      {mainCategoryBlocks.map((block) => {
         const productsInBlock = mockProducts.filter(p => p.categoryId === block.id);
         
         return (
