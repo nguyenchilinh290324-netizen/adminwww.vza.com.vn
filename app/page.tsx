@@ -132,6 +132,9 @@ export default function Home() {
   const [lang, setLang] = useState<LangType>('vi'); 
   const [searchQuery, setSearchQuery] = useState(''); 
   const [filteredProducts, setFilteredProducts] = useState(mockProducts); 
+  
+  // THÊM DÒNG NÀY: State quản lý đóng/mở menu trên di động
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const t = translations[lang];
 
@@ -202,7 +205,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white text-gray-800 font-sans">
-      <div className="sticky top-0 z-50 w-full flex flex-col bg-white shadow-sm">
+      <div className="w-full flex flex-col bg-white shadow-sm">
         
         {/* TOP BAR */}
         <div className="bg-[#cc0000] text-white text-xs py-2">
@@ -283,6 +286,7 @@ export default function Home() {
               <Menu size={18} /> {t.categoryTitle}
             </div>
             
+            {/* TOÀN BỘ MENU ĐÃ ĐƯỢC NÂNG CẤP BẤM TRÊN DI ĐỘNG NẰM Ở ĐÂY */}
             <ul className="border border-t-0 border-gray-200 bg-white text-sm rounded-b-md shadow-sm relative">
               <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex items-center gap-3 cursor-pointer group">
                 <span className="text-red-500 group-hover:scale-110 transition">🎁</span> {t.specialPromo}
@@ -292,32 +296,29 @@ export default function Home() {
               </li>
 
               {/* MENU CẤP 1: QINGMAI */}
-              <li className="p-3.5 border-b border-gray-100 flex justify-between items-center cursor-pointer group/main relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors">
-                <span className="font-medium">{t.cat1}</span>
-                <ChevronRight size={16} className="text-gray-400 group-hover/main:text-[#cc0000]" />
-
-                {/* MENU CẤP 2: QINGMAI */}
-                <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main:block z-50 text-gray-800 rounded-r-md">
+              <li 
+                className="p-3.5 border-b border-gray-100 flex flex-wrap justify-between items-center cursor-pointer group/main relative hover:bg-gray-50 transition-colors"
+                onClick={() => setActiveMenu(activeMenu === 'cat1' ? null : 'cat1')}
+              >
+                <div className="w-full flex justify-between items-center hover:text-[#cc0000]">
+                  <span className="font-medium">{t.cat1}</span>
+                  <ChevronRight size={16} className={`text-gray-400 transition-transform duration-200 ${activeMenu === 'cat1' ? 'rotate-90 text-[#cc0000]' : 'group-hover/main:text-[#cc0000]'}`} />
+                </div>
+                
+                <div className={`${activeMenu === 'cat1' ? 'block mt-2' : 'hidden'} lg:group-hover/main:block relative lg:absolute lg:left-[100%] lg:top-0 w-full lg:w-64 bg-white lg:border border-gray-200 shadow-none lg:shadow-lg z-50 text-gray-800 lg:rounded-r-md`}>
                   <ul className="py-2">
-                    <li className="px-4 py-3 flex justify-between items-center cursor-pointer group/sub relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors border-b border-gray-100">
-                      <span>Đo nhiệt độ độ ẩm</span>
-                      <ChevronRight size={14} className="text-gray-400 group-hover/sub:text-[#cc0000]" />
+                    <li className="px-4 py-3 flex flex-wrap justify-between items-center cursor-pointer group/sub relative hover:bg-gray-50 transition-colors border-b border-gray-100">
+                      <div className="w-full flex justify-between items-center hover:text-[#cc0000]">
+                        <span>Đo nhiệt độ độ ẩm</span>
+                        <ChevronRight size={14} className="text-gray-400 hidden lg:block group-hover/sub:text-[#cc0000]" />
+                      </div>
                       
-                      {/* MENU CẤP 3: DANH SÁCH SẢN PHẨM QINGMAI */}
-                      <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub:block z-50 rounded-r-md">
-                        <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">
-                          Danh Sách Sản Phẩm
-                        </div>
+                      <div className={`block lg:hidden lg:group-hover/sub:block relative lg:absolute lg:left-[100%] lg:top-0 w-full lg:w-64 bg-white lg:border border-gray-200 shadow-none lg:shadow-lg z-50 rounded-r-md mt-2 lg:mt-0`}>
+                        <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">Danh Sách Sản Phẩm</div>
                         <ul className="py-2 max-h-[300px] overflow-y-auto">
-                          <li className="px-4 py-2 hover:bg-gray-50 transition">
-                            <Link href="/san-pham/lx915" className="block hover:text-[#cc0000]">LX915 - Cảm biến nhiệt ẩm</Link>
-                          </li>
-                          <li className="px-4 py-2 hover:bg-gray-50 transition">
-                            <Link href="/san-pham/dong-ho-do-nhiet-am-cong-nghiep-lx935" className="block hover:text-[#cc0000]">LX935 - Đồng hồ nhiệt ẩm CN</Link>
-                          </li>
-                          <li className="px-4 py-2 hover:bg-gray-50 transition">
-                            <Link href="/san-pham/man-hinh-hien-thi-nhiet-am-led-co-lon" className="block hover:text-[#cc0000]">RC919 - Màn hình LED</Link>
-                          </li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition"><Link href="/san-pham/lx915" className="block hover:text-[#cc0000]">LX915 - Cảm biến nhiệt ẩm</Link></li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition"><Link href="/san-pham/dong-ho-do-nhiet-am-cong-nghiep-lx935" className="block hover:text-[#cc0000]">LX935 - Đồng hồ nhiệt ẩm CN</Link></li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition"><Link href="/san-pham/man-hinh-hien-thi-nhiet-am-led-co-lon" className="block hover:text-[#cc0000]">RC919 - Màn hình LED</Link></li>
                         </ul>
                       </div>
                     </li>
@@ -326,29 +327,28 @@ export default function Home() {
               </li>
 
               {/* MENU CẤP 1: RONGCE */}
-              <li className="p-3.5 border-b border-gray-100 flex justify-between items-center cursor-pointer group/main2 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors">
-                <span className="font-medium">{t.cat2}</span>
-                <ChevronRight size={16} className="text-gray-400 group-hover/main2:text-[#cc0000]" />
+              <li 
+                className="p-3.5 border-b border-gray-100 flex flex-wrap justify-between items-center cursor-pointer group/main2 relative hover:bg-gray-50 transition-colors"
+                onClick={() => setActiveMenu(activeMenu === 'cat2' ? null : 'cat2')}
+              >
+                <div className="w-full flex justify-between items-center hover:text-[#cc0000]">
+                  <span className="font-medium">{t.cat2}</span>
+                  <ChevronRight size={16} className={`text-gray-400 transition-transform duration-200 ${activeMenu === 'cat2' ? 'rotate-90 text-[#cc0000]' : 'group-hover/main2:text-[#cc0000]'}`} />
+                </div>
                 
-                {/* MENU CẤP 2: RONGCE */}
-                <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main2:block z-50 text-gray-800 rounded-r-md">
+                <div className={`${activeMenu === 'cat2' ? 'block mt-2' : 'hidden'} lg:group-hover/main2:block relative lg:absolute lg:left-[100%] lg:top-0 w-full lg:w-64 bg-white lg:border border-gray-200 shadow-none lg:shadow-lg z-50 text-gray-800 lg:rounded-r-md`}>
                   <ul className="py-2">
-                    <li className="px-4 py-3 flex justify-between items-center cursor-pointer group/sub2 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors border-b border-gray-100">
-                      <span>Thiết bị đo chất lượng khí</span>
-                      <ChevronRight size={14} className="text-gray-400 group-hover/sub2:text-[#cc0000]" />
+                    <li className="px-4 py-3 flex flex-wrap justify-between items-center cursor-pointer group/sub2 relative hover:bg-gray-50 transition-colors border-b border-gray-100">
+                      <div className="w-full flex justify-between items-center hover:text-[#cc0000]">
+                        <span>Thiết bị đo chất lượng khí</span>
+                        <ChevronRight size={14} className="text-gray-400 hidden lg:block group-hover/sub2:text-[#cc0000]" />
+                      </div>
                       
-                      {/* MENU CẤP 3: DANH SÁCH SẢN PHẨM RONGCE */}
-                      <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub2:block z-50 rounded-r-md">
-                        <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">
-                          Danh Sách Sản Phẩm
-                        </div>
+                      <div className={`block lg:hidden lg:group-hover/sub2:block relative lg:absolute lg:left-[100%] lg:top-0 w-full lg:w-64 bg-white lg:border border-gray-200 shadow-none lg:shadow-lg z-50 rounded-r-md mt-2 lg:mt-0`}>
+                        <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">Danh Sách Sản Phẩm</div>
                         <ul className="py-2 max-h-[300px] overflow-y-auto">
-                          <li className="px-4 py-2 hover:bg-gray-50 transition">
-                            <Link href="/san-pham/may-do-chat-luong-khong-khi-de-ban-co2-pm25" className="block hover:text-[#cc0000]">RC5001 - Máy đo CO2/PM2.5</Link>
-                          </li>
-                          <li className="px-4 py-2 hover:bg-gray-50 transition">
-                            <Link href="/san-pham/rc102" className="block hover:text-[#cc0000]">RC102 - Máy đo khí cầm tay</Link>
-                          </li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition"><Link href="/san-pham/may-do-chat-luong-khong-khi-de-ban-co2-pm25" className="block hover:text-[#cc0000]">RC5001 - Máy đo CO2/PM2.5</Link></li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition"><Link href="/san-pham/rc102" className="block hover:text-[#cc0000]">RC102 - Máy đo khí cầm tay</Link></li>
                         </ul>
                       </div>
                     </li>
@@ -357,29 +357,28 @@ export default function Home() {
               </li>
 
               {/* MENU CẤP 1: YIHUA */}
-              <li className="p-3.5 border-b border-gray-100 flex justify-between items-center cursor-pointer group/main3 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors">
-                <span className="font-medium">{t.cat3}</span>
-                <ChevronRight size={16} className="text-gray-400 group-hover/main3:text-[#cc0000]" />
+              <li 
+                className="p-3.5 border-b border-gray-100 flex flex-wrap justify-between items-center cursor-pointer group/main3 relative hover:bg-gray-50 transition-colors"
+                onClick={() => setActiveMenu(activeMenu === 'cat3' ? null : 'cat3')}
+              >
+                <div className="w-full flex justify-between items-center hover:text-[#cc0000]">
+                  <span className="font-medium">{t.cat3}</span>
+                  <ChevronRight size={16} className={`text-gray-400 transition-transform duration-200 ${activeMenu === 'cat3' ? 'rotate-90 text-[#cc0000]' : 'group-hover/main3:text-[#cc0000]'}`} />
+                </div>
                 
-                {/* MENU CẤP 2: YIHUA */}
-                <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main3:block z-50 text-gray-800 rounded-r-md">
+                <div className={`${activeMenu === 'cat3' ? 'block mt-2' : 'hidden'} lg:group-hover/main3:block relative lg:absolute lg:left-[100%] lg:top-0 w-full lg:w-64 bg-white lg:border border-gray-200 shadow-none lg:shadow-lg z-50 text-gray-800 lg:rounded-r-md`}>
                   <ul className="py-2">
-                    <li className="px-4 py-3 flex justify-between items-center cursor-pointer group/sub3 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors border-b border-gray-100">
-                      <span>Thiết bị hàn & trạm khò</span>
-                      <ChevronRight size={14} className="text-gray-400 group-hover/sub3:text-[#cc0000]" />
+                    <li className="px-4 py-3 flex flex-wrap justify-between items-center cursor-pointer group/sub3 relative hover:bg-gray-50 transition-colors border-b border-gray-100">
+                      <div className="w-full flex justify-between items-center hover:text-[#cc0000]">
+                        <span>Thiết bị hàn & trạm khò</span>
+                        <ChevronRight size={14} className="text-gray-400 hidden lg:block group-hover/sub3:text-[#cc0000]" />
+                      </div>
                       
-                      {/* MENU CẤP 3: DANH SÁCH SẢN PHẨM YIHUA */}
-                      <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub3:block z-50 rounded-r-md">
-                        <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">
-                          Danh Sách Sản Phẩm
-                        </div>
+                      <div className={`block lg:hidden lg:group-hover/sub3:block relative lg:absolute lg:left-[100%] lg:top-0 w-full lg:w-64 bg-white lg:border border-gray-200 shadow-none lg:shadow-lg z-50 rounded-r-md mt-2 lg:mt-0`}>
+                        <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">Danh Sách Sản Phẩm</div>
                         <ul className="py-2 max-h-[300px] overflow-y-auto">
-                          <li className="px-4 py-2 hover:bg-gray-50 transition">
-                            <Link href="/san-pham/tram-han-vi-mach-thong-minh-cao-cap" className="block hover:text-[#cc0000]">YIHUA 982D - Trạm hàn</Link>
-                          </li>
-                          <li className="px-4 py-2 hover:bg-gray-50 transition">
-                            <Link href="/san-pham/nguon-dc-on-dinh-dong-dien-dieu-chinh-cao-cap" className="block hover:text-[#cc0000]">YIHUA 3005D III - Nguồn DC</Link>
-                          </li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition"><Link href="/san-pham/tram-han-vi-mach-thong-minh-cao-cap" className="block hover:text-[#cc0000]">YIHUA 982D - Trạm hàn</Link></li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition"><Link href="/san-pham/nguon-dc-on-dinh-dong-dien-dieu-chinh-cao-cap" className="block hover:text-[#cc0000]">YIHUA 3005D III - Nguồn DC</Link></li>
                         </ul>
                       </div>
                     </li>
@@ -395,6 +394,7 @@ export default function Home() {
             </ul>
           </div>
 
+          {/* SLIDER VÀ BANNER ĐƯỢC GIỮ NGUYÊN BÊN DƯỚI */}
           <div className="flex-1 bg-gray-100 rounded-sm overflow-hidden relative min-h-[300px] lg:min-h-[400px]">
             <div className="absolute inset-0 flex items-center justify-center bg-white">
               <img src="/slider-1.jpg" alt="VZA Slider" className="w-full h-full object-cover" />
@@ -411,6 +411,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
 
       {/* CATEGORY HIGHLIGHTS */}
       <section className="max-w-7xl mx-auto px-4 py-8">
