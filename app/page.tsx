@@ -225,7 +225,7 @@ export default function Home() {
               <span className="text-2xl font-black text-[#cc0000] tracking-widest mt-1">VZA</span>
             </Link>
 
-            <form onSubmit={handleSearch} className="flex-1 max-w-2xl flex">
+           <form onSubmit={handleSearch} className="w-full lg:flex-1 lg:max-w-2xl flex order-last lg:order-none mt-4 lg:mt-0">
               <input 
                 type="text" 
                 value={searchQuery}
@@ -262,8 +262,8 @@ export default function Home() {
         </header>
 
         {/* NAVIGATION MENU */}
-        <div className="border-b border-gray-100 bg-white">
-          <ul className="flex justify-center items-center gap-8 text-sm font-bold text-gray-800 uppercase py-3 max-w-7xl mx-auto px-4">
+<div className="border-b border-gray-100 bg-white">
+  <ul className="flex md:justify-center items-center gap-4 md:gap-8 text-sm font-bold text-gray-800 uppercase py-3 max-w-7xl mx-auto px-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
             <li><Link href="/" className="text-[#cc0000] transition">{t.home}</Link></li>
             <li><Link href="/gioi-thieu" className="hover:text-[#cc0000] transition">{t.about}</Link></li>
             <li><Link href="/san-pham" className="hover:text-[#cc0000] transition">{t.products}</Link></li>
@@ -297,14 +297,14 @@ export default function Home() {
                 <ChevronRight size={16} className="text-gray-400 group-hover/main:text-[#cc0000]" />
 
                 {/* MENU CẤP 2: QINGMAI */}
-                <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main:block z-50 text-gray-800 rounded-r-md">
+                <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main:block z-50 text-gray-800 rounded-r-md">
                   <ul className="py-2">
                     <li className="px-4 py-3 flex justify-between items-center cursor-pointer group/sub relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors border-b border-gray-100">
                       <span>Đo nhiệt độ độ ẩm</span>
                       <ChevronRight size={14} className="text-gray-400 group-hover/sub:text-[#cc0000]" />
                       
                       {/* MENU CẤP 3: DANH SÁCH SẢN PHẨM QINGMAI */}
-                      <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub:block z-50 rounded-r-md">
+                      <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub:block z-50 rounded-r-md">
                         <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">
                           Danh Sách Sản Phẩm
                         </div>
@@ -331,14 +331,14 @@ export default function Home() {
                 <ChevronRight size={16} className="text-gray-400 group-hover/main2:text-[#cc0000]" />
                 
                 {/* MENU CẤP 2: RONGCE */}
-                <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main2:block z-50 text-gray-800 rounded-r-md">
+                <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main2:block z-50 text-gray-800 rounded-r-md">
                   <ul className="py-2">
                     <li className="px-4 py-3 flex justify-between items-center cursor-pointer group/sub2 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors border-b border-gray-100">
                       <span>Thiết bị đo chất lượng khí</span>
                       <ChevronRight size={14} className="text-gray-400 group-hover/sub2:text-[#cc0000]" />
                       
                       {/* MENU CẤP 3: DANH SÁCH SẢN PHẨM RONGCE */}
-                      <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub2:block z-50 rounded-r-md">
+                      <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub2:block z-50 rounded-r-md">
                         <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">
                           Danh Sách Sản Phẩm
                         </div>
@@ -362,14 +362,14 @@ export default function Home() {
                 <ChevronRight size={16} className="text-gray-400 group-hover/main3:text-[#cc0000]" />
                 
                 {/* MENU CẤP 2: YIHUA */}
-                <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main3:block z-50 text-gray-800 rounded-r-md">
+                <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main3:block z-50 text-gray-800 rounded-r-md">
                   <ul className="py-2">
                     <li className="px-4 py-3 flex justify-between items-center cursor-pointer group/sub3 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors border-b border-gray-100">
                       <span>Thiết bị hàn & trạm khò</span>
                       <ChevronRight size={14} className="text-gray-400 group-hover/sub3:text-[#cc0000]" />
                       
                       {/* MENU CẤP 3: DANH SÁCH SẢN PHẨM YIHUA */}
-                      <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub3:block z-50 rounded-r-md">
+                      <div className="absolute left-[100%] lg:top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub3:block z-50 rounded-r-md">
                         <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">
                           Danh Sách Sản Phẩm
                         </div>
