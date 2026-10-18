@@ -454,25 +454,25 @@ export default function Home() {
               </h2>
               
               {/* Danh sách danh mục con */}
-             {/* Danh sách danh mục con */}
-<div className="flex flex-wrap items-center gap-3 md:gap-6 text-sm font-medium">
-  {block.subCategories.map((sub, sIdx) => (
-    <Link 
-      key={sIdx} 
-      href={`/danh-muc/${block.slug}/${sub.slug}`} 
-      className="text-gray-600 hover:text-[#cc0000] transition"
-    >
-      {sub.name}
-    </Link>
-  ))}
-  <Link 
-    href={`/danh-muc/${block.slug}`} 
-    className="text-[#cc0000] font-bold hover:underline ml-auto lg:ml-4"
-  >
-    {t.viewAll}
-  </Link>
-</div>
-
+              <div className="flex flex-wrap items-center gap-3 md:gap-6 text-sm font-medium">
+                {block.subCategories.map((sub, sIdx) => (
+                  <Link 
+                    key={sIdx} 
+                    href={`/danh-muc/${block.slug}/${sub.slug}`} 
+                    className="text-gray-600 hover:text-[#cc0000] transition"
+                  >
+                    {sub.name}
+                  </Link>
+                ))}
+                <Link 
+                  href={`/danh-muc/${block.slug}`} 
+                  className="text-[#cc0000] font-bold hover:underline ml-auto lg:ml-4"
+                >
+                  {t.viewAll}
+                </Link>
+              </div>
+            </div> {/* <-- THẺ ĐÓNG QUAN TRỌNG ĐÃ ĐƯỢC BỔ SUNG Ở ĐÂY */}
+          
             {/* Lưới sản phẩm của riêng danh mục này */}
             {productsInBlock.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
