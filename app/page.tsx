@@ -205,98 +205,88 @@ export default function Home() {
   ];
 
   return (
+    // THẺ BAO NGOÀI CÙNG DÀNH CHO TOÀN BỘ TRANG (Bắt buộc)
     <div className="min-h-screen bg-white text-gray-800 font-sans">
-      {/* 1. TOP BAR */}
-      <div className="bg-[#cc0000] text-white text-xs py-2">
-        <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
-          <div>{t.welcome}</div>
-          <div className="hidden md:flex gap-6">
-            <span className="flex items-center gap-1"><CheckCircle size={14} /> {t.authentic}</span>
-            <span className="flex items-center gap-1"><RefreshCcw size={14} /> {t.cod}</span>
-            <span className="flex items-center gap-1"><Truck size={14} /> {t.shipping}</span>
-            <span className="flex items-center gap-1"><RefreshCcw size={14} /> {t.return}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. HEADER BAR */}
-      <header className="bg-white py-6 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap lg:flex-nowrap items-center justify-between gap-6">
-          
-          {/* Logo VZA - Trỏ về trang chủ */}
-          <Link href="/" className="flex flex-col items-center justify-center min-w-[120px] cursor-pointer">
-            <Image src="/logo.png" alt="VZA Logo" width={50} height={50} className="object-contain" />
-            <span className="text-2xl font-black text-[#cc0000] tracking-widest mt-1">VZA</span>
-          </Link>
-
-          {/* Thanh tìm kiếm */}
-          <form onSubmit={handleSearch} className="flex-1 max-w-2xl flex">
-            <input 
-              type="text" 
-              value={searchQuery}
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-                if(e.target.value === '') setFilteredProducts(mockProducts);
-              }}
-              placeholder={t.searchPlaceholder}
-              className="w-full border-2 border-[#cc0000] border-r-0 px-4 py-2 outline-none focus:bg-gray-50"
-            />
-            <button type="submit" className="bg-[#cc0000] px-6 text-white transition hover:bg-red-700 flex items-center justify-center">
-              <Search size={20} />
-            </button>
-          </form>
-
-          {/* Hotline & Ngôn ngữ */}
-          <div className="flex items-center gap-4 pt-3 lg:pt-0">
-            <a 
-              href="https://zalo.me/0933935329" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="relative hidden sm:flex bg-[#cc0000] text-white items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition hover:bg-red-700 shadow-sm mt-3"
-            >
-              <span className="absolute -top-4 left-3 text-[10px] text-gray-400 font-semibold uppercase">{t.hotline}</span>
-              <Phone size={16} /> 0933.935.329
-            </a>
-
-            <a 
-              href="https://zalo.me/0898997570" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="relative hidden sm:flex bg-[#cc0000] text-white items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition hover:bg-red-700 shadow-sm mt-3"
-            >
-              <span className="absolute -top-4 left-3 text-[10px] text-gray-400 font-semibold uppercase">{t.hotline}</span>
-              <Phone size={16} /> 0898.997.570
-            </a>
-
-            <div className="flex items-center gap-2 font-bold text-sm ml-2 border-l-2 border-gray-200 pl-4 h-full">
-              <button 
-                onClick={() => setLang('vi')} 
-                className={lang === 'vi' ? 'text-[#cc0000]' : 'text-gray-500 hover:text-[#cc0000] transition'}
-              >
-                VN
-              </button>
-              <span className="text-gray-300">|</span>
-              <button 
-                onClick={() => setLang('en')}
-                className={lang === 'en' ? 'text-[#cc0000]' : 'text-gray-500 hover:text-[#cc0000] transition'}
-              >
-                EN
-              </button>
+      
+      {/* PHẦN ĐƯỢC BỌC ĐỂ CỐ ĐỊNH KHI CUỘN */}
+      <div className="sticky top-0 z-50 w-full flex flex-col bg-white shadow-sm">
+        
+        {/* 1. TOP BAR */}
+        <div className="bg-[#cc0000] text-white text-xs py-2">
+          <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div>{t.welcome}</div>
+            <div className="hidden md:flex gap-6">
+              <span className="flex items-center gap-1"><CheckCircle size={14} /> {t.authentic}</span>
+              <span className="flex items-center gap-1"><RefreshCcw size={14} /> {t.cod}</span>
+              <span className="flex items-center gap-1"><Truck size={14} /> {t.shipping}</span>
+              <span className="flex items-center gap-1"><RefreshCcw size={14} /> {t.return}</span>
             </div>
           </div>
         </div>
-      </header>
 
-      {/* 3. NAVIGATION MENU */}
-      <ul className="flex items-center gap-8 text-sm font-bold text-gray-800 uppercase pl-[280px]">
-        <li><Link href="/" className="text-[#cc0000] transition">{t.home}</Link></li>
-        <li><Link href="/gioi-thieu" className="hover:text-[#cc0000] transition">{t.about}</Link></li>
-        <li><Link href="/san-pham" className="hover:text-[#cc0000] transition">{t.products}</Link></li>
-        <li><Link href="/tin-tuc" className="hover:text-[#cc0000] transition">{t.news}</Link></li>
-        <li><Link href="/bao-hanh" className="hover:text-[#cc0000] transition">{t.warranty}</Link></li>
-        <li><Link href="/ho-tro" className="hover:text-[#cc0000] transition">{t.support}</Link></li>
-        <li><Link href="/lien-he" className="hover:text-[#cc0000] transition">{t.contact}</Link></li>
-      </ul>
+        {/* 2. HEADER BAR */}
+        <header className="bg-white py-4 border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-4 flex flex-wrap lg:flex-nowrap items-center justify-between gap-6">
+            
+            {/* Logo VZA */}
+            <Link href="/" className="flex flex-col items-center justify-center min-w-[120px] cursor-pointer">
+              <Image src="/logo.png" alt="VZA Logo" width={50} height={50} className="object-contain" />
+              <span className="text-2xl font-black text-[#cc0000] tracking-widest mt-1">VZA</span>
+            </Link>
+
+            {/* Thanh tìm kiếm */}
+            <form onSubmit={handleSearch} className="flex-1 max-w-2xl flex">
+              <input 
+                type="text" 
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  if(e.target.value === '') setFilteredProducts(mockProducts);
+                }}
+                placeholder={t.searchPlaceholder}
+                className="w-full border-2 border-[#cc0000] border-r-0 px-4 py-2 outline-none focus:bg-gray-50"
+              />
+              <button type="submit" className="bg-[#cc0000] px-6 text-white transition hover:bg-red-700 flex items-center justify-center">
+                <Search size={20} />
+              </button>
+            </form>
+
+            {/* Hotline & Ngôn ngữ */}
+            <div className="flex items-center gap-4 pt-3 lg:pt-0">
+              <a href="https://zalo.me/0933935329" target="_blank" rel="noopener noreferrer" className="relative hidden sm:flex bg-[#cc0000] text-white items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition hover:bg-red-700 shadow-sm mt-3">
+                <span className="absolute -top-4 left-3 text-[10px] text-gray-400 font-semibold uppercase">{t.hotline}</span>
+                <Phone size={16} /> 0933.935.329
+              </a>
+
+              <a href="https://zalo.me/0898997570" target="_blank" rel="noopener noreferrer" className="relative hidden sm:flex bg-[#cc0000] text-white items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition hover:bg-red-700 shadow-sm mt-3">
+                <span className="absolute -top-4 left-3 text-[10px] text-gray-400 font-semibold uppercase">{t.hotline}</span>
+                <Phone size={16} /> 0898.997.570
+              </a>
+
+              <div className="flex items-center gap-2 font-bold text-sm ml-2 border-l-2 border-gray-200 pl-4 h-full">
+                <button onClick={() => setLang('vi')} className={lang === 'vi' ? 'text-[#cc0000]' : 'text-gray-500 hover:text-[#cc0000] transition'}>VN</button>
+                <span className="text-gray-300">|</span>
+                <button onClick={() => setLang('en')} className={lang === 'en' ? 'text-[#cc0000]' : 'text-gray-500 hover:text-[#cc0000] transition'}>EN</button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* 3. NAVIGATION MENU */}
+        <div className="border-b border-gray-100 bg-white">
+          <ul className="flex justify-center items-center gap-8 text-sm font-bold text-gray-800 uppercase py-3 max-w-7xl mx-auto px-4">
+            <li><Link href="/" className="text-[#cc0000] transition">{t.home}</Link></li>
+            <li><Link href="/gioi-thieu" className="hover:text-[#cc0000] transition">{t.about}</Link></li>
+            <li><Link href="/san-pham" className="hover:text-[#cc0000] transition">{t.products}</Link></li>
+            <li><Link href="/tin-tuc" className="hover:text-[#cc0000] transition">{t.news}</Link></li>
+            <li><Link href="/bao-hanh" className="hover:text-[#cc0000] transition">{t.warranty}</Link></li>
+            <li><Link href="/ho-tro" className="hover:text-[#cc0000] transition">{t.support}</Link></li>
+            <li><Link href="/lien-he" className="hover:text-[#cc0000] transition">{t.contact}</Link></li>
+          </ul>
+        </div>
+
+      </div>
+      {/* KẾT THÚC PHẦN CỐ ĐỊNH */}
 
       {/* 4. HERO SECTION */}
       <section className="max-w-7xl mx-auto px-4 py-6">
