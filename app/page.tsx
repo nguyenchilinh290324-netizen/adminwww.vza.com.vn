@@ -287,17 +287,15 @@ export default function Home() {
       </header>
 
       {/* 3. NAVIGATION MENU */}
-      <nav className="max-w-7xl mx-auto px-4 py-3 hidden md:block border-b border-gray-100">
-        <ul className="flex items-center gap-8 text-sm font-bold text-gray-800 uppercase pl-[280px]">
-          <li><Link href="/" className="text-[#cc0000] transition">{t.home}</Link></li>
-          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.about}</Link></li>
-          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.products}</Link></li>
-          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.news}</Link></li>
-          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.warranty}</Link></li>
-          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.support}</Link></li>
-          <li><Link href="#" className="hover:text-[#cc0000] transition">{t.contact}</Link></li>
-        </ul>
-      </nav>
+      <ul className="flex items-center gap-8 text-sm font-bold text-gray-800 uppercase pl-[280px]">
+  <li><Link href="/" className="text-[#cc0000] transition">{t.home}</Link></li>
+  <li><Link href="/gioi-thieu" className="hover:text-[#cc0000] transition">{t.about}</Link></li>
+  <li><Link href="/san-pham" className="hover:text-[#cc0000] transition">{t.products}</Link></li>
+  <li><Link href="/tin-tuc" className="hover:text-[#cc0000] transition">{t.news}</Link></li>
+  <li><Link href="/bao-hanh" className="hover:text-[#cc0000] transition">{t.warranty}</Link></li>
+  <li><Link href="/ho-tro" className="hover:text-[#cc0000] transition">{t.support}</Link></li>
+  <li><Link href="/lien-he" className="hover:text-[#cc0000] transition">{t.contact}</Link></li>
+</ul>
 
       {/* 4. HERO SECTION */}
       <section className="max-w-7xl mx-auto px-4 py-6">
@@ -456,24 +454,24 @@ export default function Home() {
               </h2>
               
               {/* Danh sách danh mục con */}
-              <div className="flex flex-wrap items-center gap-3 md:gap-6 text-sm font-medium">
-                {block.subCategories.map((sub, sIdx) => (
-                  <Link 
-                    key={sIdx} 
-                    href={`/danh-muc/${block.slug}/${sub.slug}`} 
-                    className="text-gray-600 hover:text-[#cc0000] transition"
-                  >
-                    {sub.name}
-                  </Link>
-                ))}
-                <Link 
-                  href={`/danh-muc/${block.slug}`} 
-                  className="text-[#cc0000] font-bold hover:underline ml-auto lg:ml-4"
-                >
-                  {t.viewAll}
-                </Link>
-              </div>
-            </div>
+             {/* Danh sách danh mục con */}
+<div className="flex flex-wrap items-center gap-3 md:gap-6 text-sm font-medium">
+  {block.subCategories.map((sub, sIdx) => (
+    <Link 
+      key={sIdx} 
+      href={`/danh-muc/${block.slug}/${sub.slug}`} 
+      className="text-gray-600 hover:text-[#cc0000] transition"
+    >
+      {sub.name}
+    </Link>
+  ))}
+  <Link 
+    href={`/danh-muc/${block.slug}`} 
+    className="text-[#cc0000] font-bold hover:underline ml-auto lg:ml-4"
+  >
+    {t.viewAll}
+  </Link>
+</div>
 
             {/* Lưới sản phẩm của riêng danh mục này */}
             {productsInBlock.length > 0 ? (
