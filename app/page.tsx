@@ -14,7 +14,7 @@ const mockProducts = [
     categoryId: 'cat1',
     slug: 'dong-ho-do-nhiet-am-cong-nghiep-lx935',
     name: 'Đồng hồ đo nhiệt ẩm công nghiệp (Cảm biến ngoài)',
-    brand: 'RongCE / QINGMAI',
+    brand: 'QINGMAI',
     spec: '-40~80°C · 0~99.9%RH · ±0.3°C · Đầu dò dây dài 3m',
     price: 'Liên hệ',
     image: '/images/lx935.png',
@@ -25,7 +25,7 @@ const mockProducts = [
     categoryId: 'cat1',
     slug: 'man-hinh-hien-thi-nhiet-am-led-co-lon',
     name: 'Màn hình hiển thị nhiệt ẩm LED cỡ lớn',
-    brand: 'RongCE / QINGMAI',
+    brand: 'QINGMAI',
     spec: 'Kích thước 600x400mm · Hỗ trợ chuẩn RS485 Modbus',
     price: 'Liên hệ',
     image: '/images/rc919.png',
@@ -36,7 +36,7 @@ const mockProducts = [
     categoryId: 'cat2',
     slug: 'may-do-chat-luong-khong-khi-de-ban-co2-pm25',
     name: 'Máy đo chất lượng không khí để bàn (CO2/PM2.5)',
-    brand: 'RongCE / QINGMAI',
+    brand: 'RONGCE',
     spec: 'Pin sạc 2000mAh · Cổng Type-C · Cảm biến đa chỉ tiêu',
     price: 'Liên hệ',
     image: '/images/rc5001.png',
@@ -85,9 +85,9 @@ const translations = {
     categoryTitle: 'Danh mục sản phẩm',
     specialPromo: 'Khuyến mại đặc biệt',
     bestSeller: 'Sản phẩm bán chạy',
-    cat1: 'Đo nhiệt độ & độ ẩm CN',
-    cat2: 'Thiết bị đo chất lượng khí',
-    cat3: 'Thiết bị hàn & trạm khò',
+    cat1: 'QINGMAI', 
+    cat2: 'RONGCE', 
+    cat3: 'YIHUA', 
     cat4: 'Vật tư công nghiệp khác',
     highlightTitle: 'Danh mục nổi bật',
     recommendTitle: 'Sản phẩm đề xuất',
@@ -113,9 +113,9 @@ const translations = {
     categoryTitle: 'Product Categories',
     specialPromo: 'Special Promotions',
     bestSeller: 'Best Sellers',
-    cat1: 'Industrial Temp & Humidity',
-    cat2: 'Air Quality Monitors',
-    cat3: 'Soldering & Rework Stations',
+    cat1: 'QINGMAI', 
+    cat2: 'RONGCE', 
+    cat3: 'YIHUA', 
     cat4: 'Other Industrial Supplies',
     highlightTitle: 'Highlighted Categories',
     recommendTitle: 'Recommended Products',
@@ -126,7 +126,6 @@ const translations = {
   }
 }
 
-// Định nghĩa kiểu ngôn ngữ cho TypeScript
 type LangType = 'vi' | 'en';
 
 export default function Home() {
@@ -136,7 +135,6 @@ export default function Home() {
 
   const t = translations[lang];
 
-  // Hàm xử lý tìm kiếm
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) {
@@ -151,7 +149,6 @@ export default function Home() {
     );
     setFilteredProducts(results);
     
-    // Tự động cuộn xuống phần sản phẩm khi tìm kiếm
     document.getElementById('product-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -162,7 +159,6 @@ export default function Home() {
     { name: t.cat4, count: '300+ items', image: '/images/categories/vat-tu.png' },
   ];
 
-  // Dữ liệu khối danh mục chính hiển thị trên trang chủ
   const mainCategoryBlocks = [
     {
       id: 'cat1',
@@ -205,13 +201,10 @@ export default function Home() {
   ];
 
   return (
-    // THẺ BAO NGOÀI CÙNG DÀNH CHO TOÀN BỘ TRANG (Bắt buộc)
     <div className="min-h-screen bg-white text-gray-800 font-sans">
-      
-      {/* PHẦN ĐƯỢC BỌC ĐỂ CỐ ĐỊNH KHI CUỘN */}
       <div className="sticky top-0 z-50 w-full flex flex-col bg-white shadow-sm">
         
-        {/* 1. TOP BAR */}
+        {/* TOP BAR */}
         <div className="bg-[#cc0000] text-white text-xs py-2">
           <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <div>{t.welcome}</div>
@@ -224,17 +217,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 2. HEADER BAR */}
+        {/* HEADER BAR */}
         <header className="bg-white py-4 border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-4 flex flex-wrap lg:flex-nowrap items-center justify-between gap-6">
-            
-            {/* Logo VZA */}
             <Link href="/" className="flex flex-col items-center justify-center min-w-[120px] cursor-pointer">
               <Image src="/logo.png" alt="VZA Logo" width={50} height={50} className="object-contain" />
               <span className="text-2xl font-black text-[#cc0000] tracking-widest mt-1">VZA</span>
             </Link>
 
-            {/* Thanh tìm kiếm */}
             <form onSubmit={handleSearch} className="flex-1 max-w-2xl flex">
               <input 
                 type="text" 
@@ -251,7 +241,6 @@ export default function Home() {
               </button>
             </form>
 
-            {/* Hotline & Ngôn ngữ */}
             <div className="flex items-center gap-4 pt-3 lg:pt-0">
               <a href="https://zalo.me/0933935329" target="_blank" rel="noopener noreferrer" className="relative hidden sm:flex bg-[#cc0000] text-white items-center gap-2 px-4 py-2 rounded-full font-bold text-sm transition hover:bg-red-700 shadow-sm mt-3">
                 <span className="absolute -top-4 left-3 text-[10px] text-gray-400 font-semibold uppercase">{t.hotline}</span>
@@ -272,7 +261,7 @@ export default function Home() {
           </div>
         </header>
 
-        {/* 3. NAVIGATION MENU */}
+        {/* NAVIGATION MENU */}
         <div className="border-b border-gray-100 bg-white">
           <ul className="flex justify-center items-center gap-8 text-sm font-bold text-gray-800 uppercase py-3 max-w-7xl mx-auto px-4">
             <li><Link href="/" className="text-[#cc0000] transition">{t.home}</Link></li>
@@ -284,37 +273,122 @@ export default function Home() {
             <li><Link href="/lien-he" className="hover:text-[#cc0000] transition">{t.contact}</Link></li>
           </ul>
         </div>
-
       </div>
-      {/* KẾT THÚC PHẦN CỐ ĐỊNH */}
 
-      {/* 4. HERO SECTION */}
+      {/* HERO SECTION */}
       <section className="max-w-7xl mx-auto px-4 py-6">
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="w-full lg:w-[260px] shrink-0 z-10">
             <div className="bg-[#cc0000] text-white font-bold py-3 px-4 flex items-center gap-2 uppercase text-sm rounded-t-md">
               <Menu size={18} /> {t.categoryTitle}
             </div>
-            <ul className="border border-t-0 border-gray-200 bg-white text-sm rounded-b-md shadow-sm">
+            
+            <ul className="border border-t-0 border-gray-200 bg-white text-sm rounded-b-md shadow-sm relative">
               <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex items-center gap-3 cursor-pointer group">
                 <span className="text-red-500 group-hover:scale-110 transition">🎁</span> {t.specialPromo}
               </li>
               <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex items-center gap-3 cursor-pointer group">
                 <span className="text-red-500 group-hover:scale-110 transition">🔥</span> {t.bestSeller}
               </li>
-              <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group">
-                <span>{t.cat1}</span>
-                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#cc0000]" />
+
+              {/* MENU CẤP 1: QINGMAI */}
+              <li className="p-3.5 border-b border-gray-100 flex justify-between items-center cursor-pointer group/main relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors">
+                <span className="font-medium">{t.cat1}</span>
+                <ChevronRight size={16} className="text-gray-400 group-hover/main:text-[#cc0000]" />
+
+                {/* MENU CẤP 2: QINGMAI */}
+                <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main:block z-50 text-gray-800 rounded-r-md">
+                  <ul className="py-2">
+                    <li className="px-4 py-3 flex justify-between items-center cursor-pointer group/sub relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors border-b border-gray-100">
+                      <span>Đo nhiệt độ độ ẩm</span>
+                      <ChevronRight size={14} className="text-gray-400 group-hover/sub:text-[#cc0000]" />
+                      
+                      {/* MENU CẤP 3: DANH SÁCH SẢN PHẨM QINGMAI */}
+                      <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub:block z-50 rounded-r-md">
+                        <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">
+                          Danh Sách Sản Phẩm
+                        </div>
+                        <ul className="py-2 max-h-[300px] overflow-y-auto">
+                          <li className="px-4 py-2 hover:bg-gray-50 transition">
+                            <Link href="/san-pham/lx915" className="block hover:text-[#cc0000]">LX915 - Cảm biến nhiệt ẩm</Link>
+                          </li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition">
+                            <Link href="/san-pham/dong-ho-do-nhiet-am-cong-nghiep-lx935" className="block hover:text-[#cc0000]">LX935 - Đồng hồ nhiệt ẩm CN</Link>
+                          </li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition">
+                            <Link href="/san-pham/man-hinh-hien-thi-nhiet-am-led-co-lon" className="block hover:text-[#cc0000]">RC919 - Màn hình LED</Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group">
-                <span>{t.cat2}</span>
-                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#cc0000]" />
+
+              {/* MENU CẤP 1: RONGCE */}
+              <li className="p-3.5 border-b border-gray-100 flex justify-between items-center cursor-pointer group/main2 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors">
+                <span className="font-medium">{t.cat2}</span>
+                <ChevronRight size={16} className="text-gray-400 group-hover/main2:text-[#cc0000]" />
+                
+                {/* MENU CẤP 2: RONGCE */}
+                <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main2:block z-50 text-gray-800 rounded-r-md">
+                  <ul className="py-2">
+                    <li className="px-4 py-3 flex justify-between items-center cursor-pointer group/sub2 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors border-b border-gray-100">
+                      <span>Thiết bị đo chất lượng khí</span>
+                      <ChevronRight size={14} className="text-gray-400 group-hover/sub2:text-[#cc0000]" />
+                      
+                      {/* MENU CẤP 3: DANH SÁCH SẢN PHẨM RONGCE */}
+                      <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub2:block z-50 rounded-r-md">
+                        <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">
+                          Danh Sách Sản Phẩm
+                        </div>
+                        <ul className="py-2 max-h-[300px] overflow-y-auto">
+                          <li className="px-4 py-2 hover:bg-gray-50 transition">
+                            <Link href="/san-pham/may-do-chat-luong-khong-khi-de-ban-co2-pm25" className="block hover:text-[#cc0000]">RC5001 - Máy đo CO2/PM2.5</Link>
+                          </li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition">
+                            <Link href="/san-pham/rc102" className="block hover:text-[#cc0000]">RC102 - Máy đo khí cầm tay</Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="p-3.5 border-b border-gray-100 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group">
-                <span>{t.cat3}</span>
-                <ChevronRight size={16} className="text-gray-400 group-hover:text-[#cc0000]" />
+
+              {/* MENU CẤP 1: YIHUA */}
+              <li className="p-3.5 border-b border-gray-100 flex justify-between items-center cursor-pointer group/main3 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors">
+                <span className="font-medium">{t.cat3}</span>
+                <ChevronRight size={16} className="text-gray-400 group-hover/main3:text-[#cc0000]" />
+                
+                {/* MENU CẤP 2: YIHUA */}
+                <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/main3:block z-50 text-gray-800 rounded-r-md">
+                  <ul className="py-2">
+                    <li className="px-4 py-3 flex justify-between items-center cursor-pointer group/sub3 relative hover:text-[#cc0000] hover:bg-gray-50 transition-colors border-b border-gray-100">
+                      <span>Thiết bị hàn & trạm khò</span>
+                      <ChevronRight size={14} className="text-gray-400 group-hover/sub3:text-[#cc0000]" />
+                      
+                      {/* MENU CẤP 3: DANH SÁCH SẢN PHẨM YIHUA */}
+                      <div className="absolute left-[100%] top-0 w-64 bg-white border border-gray-200 shadow-lg hidden group-hover/sub3:block z-50 rounded-r-md">
+                        <div className="px-4 py-3 font-bold text-gray-500 bg-gray-50 border-b border-gray-100 text-xs uppercase tracking-wider">
+                          Danh Sách Sản Phẩm
+                        </div>
+                        <ul className="py-2 max-h-[300px] overflow-y-auto">
+                          <li className="px-4 py-2 hover:bg-gray-50 transition">
+                            <Link href="/san-pham/tram-han-vi-mach-thong-minh-cao-cap" className="block hover:text-[#cc0000]">YIHUA 982D - Trạm hàn</Link>
+                          </li>
+                          <li className="px-4 py-2 hover:bg-gray-50 transition">
+                            <Link href="/san-pham/nguon-dc-on-dinh-dong-dien-dieu-chinh-cao-cap" className="block hover:text-[#cc0000]">YIHUA 3005D III - Nguồn DC</Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </li>
-              <li className="p-3.5 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group">
+
+              {/* MENU CẤP 1: VẬT TƯ KHÁC */}
+              <li className="p-3.5 hover:text-[#cc0000] flex justify-between items-center cursor-pointer group hover:bg-gray-50 transition-colors rounded-b-md">
                 <span>{t.cat4}</span>
                 <ChevronRight size={16} className="text-gray-400 group-hover:text-[#cc0000]" />
               </li>
@@ -338,7 +412,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. CATEGORY HIGHLIGHTS */}
+      {/* CATEGORY HIGHLIGHTS */}
       <section className="max-w-7xl mx-auto px-4 py-8">
         <h2 className="text-2xl font-black text-gray-800 uppercase mb-6 flex items-center gap-3">
           <span className="w-1.5 h-6 bg-[#cc0000] inline-block"></span>
@@ -347,7 +421,6 @@ export default function Home() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {categories.map((cat, idx) => (
             <div key={idx} className="border border-gray-200 rounded-md p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:border-[#cc0000] hover:shadow-md transition bg-white group">
-              
               <div className="h-32 w-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Image 
                   src={cat.image} 
@@ -357,7 +430,6 @@ export default function Home() {
                   className="object-contain w-full h-full"
                 />
               </div>
-
               <h3 className="font-bold text-gray-800 group-hover:text-[#cc0000] transition">{cat.name}</h3>
               <p className="text-xs text-gray-500 mt-1">{cat.count}</p>
             </div>
@@ -365,7 +437,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6. PRODUCT GRID */}
+      {/* PRODUCT GRID */}
       <section id="product-section" className="max-w-7xl mx-auto px-4 py-8 mb-12">
         <div className="flex justify-between items-end border-b-2 border-[#cc0000] pb-2 mb-6">
           <h2 className="text-2xl font-black text-gray-800 uppercase flex items-center gap-3">
@@ -379,12 +451,10 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {filteredProducts.map((product, idx) => (
               <div key={idx} className="border border-gray-200 rounded-md bg-white hover:shadow-xl hover:border-[#cc0000] transition duration-300 flex flex-col relative group">
-                
                 <div className="absolute top-2 left-2 bg-[#cc0000] text-white text-[10px] font-bold px-2 py-1 rounded-sm z-10 pointer-events-none">
                   {product.badge}
                 </div>
 
-                {/* Gắn Link cho Hình ảnh */}
                 <Link href={`/san-pham/${product.slug}`} title={product.name} prefetch={false} className="h-48 bg-white p-4 flex items-center justify-center relative overflow-hidden rounded-t-md block">
                   <Image 
                     src={product.image} 
@@ -397,14 +467,11 @@ export default function Home() {
 
                 <div className="p-4 flex flex-col flex-1">
                   <span className="text-[11px] text-gray-500 mb-1">{product.brand}</span>
-                  
-                  {/* Gắn Link cho Tiêu đề */}
                   <Link href={`/san-pham/${product.slug}`} prefetch={false} className="block">
                     <h3 className="text-sm font-bold text-gray-800 leading-snug mb-2 group-hover:text-[#cc0000] transition line-clamp-2">
                       {product.name}
                     </h3>
                   </Link>
-                  
                   <p className="text-[11px] text-gray-600 bg-gray-50 p-2 rounded-sm mb-3 line-clamp-2">
                     {product.spec}
                   </p>
@@ -419,8 +486,6 @@ export default function Home() {
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-lg font-black text-[#cc0000]">{product.price === 'Liên hệ' ? t.priceContact : product.price}</span>
-                      
-                      {/* Nút thêm giỏ hàng được đẩy nổi lên để có thể click độc lập */}
                       <button className="bg-gray-100 hover:bg-[#cc0000] hover:text-white p-2 rounded-full transition text-gray-600 relative z-10">
                         <ShoppingCart size={16} />
                       </button>
@@ -437,7 +502,7 @@ export default function Home() {
         )}
       </section>
 
-      {/* 6.5. KHỐI DANH MỤC CHÍNH VÀ DANH MỤC CON */}
+      {/* KHỐI DANH MỤC CHÍNH VÀ DANH MỤC CON */}
       {mainCategoryBlocks.map((block, index) => {
         const productsInBlock = mockProducts.filter(p => p.categoryId === block.id);
         
@@ -476,7 +541,6 @@ export default function Home() {
                       {product.badge}
                     </div>
 
-                    {/* Gắn Link cho Hình ảnh */}
                     <Link href={`/san-pham/${product.slug}`} title={product.name} prefetch={false} className="h-48 bg-white p-4 flex items-center justify-center relative overflow-hidden rounded-t-md block">
                       <Image 
                         src={product.image} 
@@ -489,8 +553,6 @@ export default function Home() {
 
                     <div className="p-4 flex flex-col flex-1">
                       <span className="text-[11px] text-gray-500 mb-1">{product.brand}</span>
-                      
-                      {/* Gắn Link cho Tiêu đề */}
                       <Link href={`/san-pham/${product.slug}`} prefetch={false} className="block">
                         <h3 className="text-sm font-bold text-gray-800 leading-snug mb-2 group-hover:text-[#cc0000] transition line-clamp-2">
                           {product.name}
@@ -503,8 +565,6 @@ export default function Home() {
                       <div className="mt-auto">
                         <div className="flex items-center justify-between">
                           <span className="text-lg font-black text-[#cc0000]">{product.price === 'Liên hệ' ? t.priceContact : product.price}</span>
-                          
-                          {/* Nút giỏ hàng */}
                           <button className="bg-gray-100 hover:bg-[#cc0000] hover:text-white p-2 rounded-full transition text-gray-600 relative z-10">
                             <ShoppingCart size={16} />
                           </button>
@@ -523,7 +583,7 @@ export default function Home() {
         );
       })}
 
-      {/* 7. FOOTER */}
+      {/* FOOTER */}
       <footer className="bg-white border-t-4 border-[#cc0000] pt-12 pb-6">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-2">
