@@ -313,8 +313,8 @@ export default function Home() {
                 <Image 
                   src={cat.image} 
                   alt={cat.name} 
-                  width={120} 
-                  height={120} 
+                  width={200} 
+                  height={300} 
                   className="object-contain"
                 />
               </div>
@@ -345,11 +345,15 @@ export default function Home() {
                   {product.badge}
                 </div>
 
-                <div className="h-48 bg-gray-50 p-4 flex items-center justify-center relative overflow-hidden rounded-t-md">
-                  <div className="text-gray-400 text-xs text-center border-2 border-dashed border-gray-300 w-full h-full flex items-center justify-center group-hover:scale-105 transition-transform">
-                    [Ảnh {product.partNumber}]
-                  </div>
-                </div>
+                <div className="h-48 bg-white p-4 flex items-center justify-center relative overflow-hidden rounded-t-md">
+  <Image 
+    src={product.image} 
+    alt={product.name} 
+    width={200} 
+    height={200} 
+    className="object-contain w-full h-full group-hover:scale-105 transition-transform"
+  />
+</div>
 
                 <div className="p-4 flex flex-col flex-1">
                   <span className="text-[11px] text-gray-500 mb-1">{product.brand}</span>
